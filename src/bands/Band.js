@@ -5,6 +5,9 @@ function Band() {
   this.url = '';
   this.datesPath = '';
   this.name = '';
+  this.style = [];
+
+  this.last_indexed = new Date ();
 }
 
 Band.prototype.toString = function () {

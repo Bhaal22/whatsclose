@@ -9,7 +9,8 @@ function Volbeat() {
   this.url = 'http://www.volbeat.dk';
   this.datesPath = '/3/dates/';
   this.name = 'Volbeat';
-  this.concerts = [];
+  this.style = '';
+  this.concerts = ['Metal'];
 }
 
 Volbeat.prototype = new band.Band();
