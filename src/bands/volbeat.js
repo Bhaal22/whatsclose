@@ -9,8 +9,8 @@ function Volbeat() {
   this.url = 'http://www.volbeat.dk';
   this.datesPath = '/3/dates/';
   this.name = 'Volbeat';
-  this.style = '';
-  this.concerts = ['Metal'];
+  this.style = ['Metal'];
+  this.concerts = [];
 }
 
 Volbeat.prototype = new band.Band();
@@ -29,5 +29,5 @@ Volbeat.prototype.extract_concert_information = function ($) {
 }
 
 module.exports = {
-  Volbeat: Volbeat
+  Band: Volbeat
 };
