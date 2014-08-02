@@ -27,9 +27,6 @@ TagadaJones.prototype.extract_concert_information = function ($) {
     var location = fullLocation.split ('\n')[2].trim (); 
     var dateElements = date.split ("/");
 
-    console.log (date);
-    console.log (location);
-
     band.concerts.push (new Concert (new Date (dateElements[2], dateElements[1], dateElements[0]),
                                      location));
   });

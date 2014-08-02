@@ -24,7 +24,7 @@ Indexer.prototype.publish = function (data) {
         winston.log("vas savoir ^^");
       }
     }
-    })
+  })
 }
 
 module.exports = {
