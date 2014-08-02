@@ -1,0 +1,38 @@
+body {
+    font-family: Helvetica Neue, Helvetica, Arial;
+    background: #EEE;
+}
+
+#lastTimeUpdated {
+    font-size: 10px;
+    position: absolute;
+    bottom :5px;
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+
+#wrapper {
+    /*border: 1px dashed deeppink;*/
+}
+
+#serversList {
+    display: block;
+    float: left;
+    width: 49% ;
+    /*border: 1px solid blue;*/
+}
+
+.listTitle{
+
+}
+
+#clustersList{
+    display: block;
+    float: right;
+    width: 49% ;
+    /*border: 1px solid red;*/
+}
