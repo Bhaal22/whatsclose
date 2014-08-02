@@ -6,9 +6,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var servers = require('./routes/api/servers');
-var clusters = require('./routes/api/clusters');
+// var routes = require('./routes/index');
+// var servers = require('./routes/api/servers');
+// var clusters = require('./routes/api/clusters');
 
 var io;
 var app = express();

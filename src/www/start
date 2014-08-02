@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-var debug = require('debug')('test_module1');
 var config = require('app-config');
-var version = require('../modules/utils/version');
+var version = require('./modules/utils/version');
 
 console.log(config.settings.application.name +" "+ version.getFormattedVersion() + " started.");
 
-var startServer = require('../app').startServer;
+var startServer = require('./app').startServer;
 
 startServer(config.settings.web.port);
