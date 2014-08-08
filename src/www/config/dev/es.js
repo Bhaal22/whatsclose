@@ -1,4 +1,5 @@
 module.exports = {
     hostname : "localhost",
-    port : '9200'
+    port : '9200',
+    index : "concerts"
 };

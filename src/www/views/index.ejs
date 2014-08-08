@@ -2,10 +2,34 @@
 <html>
   <head>
     <title><%= title %></title>
+    <!--
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    -->
+    
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/indexView.js"></script>
+    
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <div>
+    
+
+		<%- label_for("bandName", "Band Name") %> 
+		<%- text_field_tag("bandName", {"size": 15, "maxlength": 15}) %>
+		
+		<%- js_button("Search", "searchBandName()") %>
+
+    </div>
+    
+    
+    <div id="result" style="display: none">
+    	<div id="title">
+    		<h2>Results</h2>
+    	</div>
+    </div>
+    
+    
   </body>
 </html>

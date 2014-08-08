@@ -1,3 +1,4 @@
+/*
 var config = require('app-config');
 var express = require('express');
 var path = require('path');
@@ -10,11 +11,11 @@ var bodyParser = require('body-parser');
 // var servers = require('./routes/api/servers');
 // var clusters = require('./routes/api/clusters');
 
-var io;
+//var io;
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(favicon());
@@ -24,16 +25,16 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/api/servers', servers);
-app.use('/api/clusters', clusters);
+//app.use('/', routes);
+//app.use('/api/servers', servers);
+//app.use('/api/clusters', clusters);
 
 /// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+//app.use(function(req, res, next) {
+//    var err = new Error('Not Found');
+//    err.status = 404;
+//    next(err);
+//});
 
 /// error handlers
 
@@ -65,3 +66,62 @@ module.exports.startServer = function(port){
         console.log('Express server with Socket.io listening on port ' + server.address().port);
     });
 };
+*/
+
+
+var express = require('express');
+var http = require('http');
+var helpers = require('express-helpers');
+var bodyParser = require('body-parser');
+var searcher = require('./modules/searcher');
+var path = require('path');
+
+var app = express();
+var server = http.Server(app);
+
+console.log("setting ejs engine");
+app.set('view engine', 'ejs');
+
+app.use(bodyParser.json() );
+app.use(bodyParser.urlencoded());
+app.use(express.static(path.join(__dirname, 'public')));
+
+console.log("setting helpers");
+helpers(app);
+
+/*
+ * Index
+ */
+app.get('/', function(req, res) {
+	res.render('index', { title: 'The index page!' });
+});
+
+/*
+ * Ajax call to search band name
+ */
+app.post('/bandSearch', function(req, res) {
+	console.log("Band Search");
+	console.log("param = " + req.body.bandName);
+	res.locals.title = 'Results';
+	
+	console.log('body: ' + JSON.stringify(req.body));
+	
+	var bandName = req.body.bandName;
+	
+	if (bandName) {
+		searcher.searchBandName(bandName, function(hits) {
+			console.log("app hits = " + hits);	
+			res.status(201).send(hits);
+		});
+	} else {
+		res.status(201).send('');
+	}
+	
+});
+
+module.exports.startServer = function(port) {
+	server.listen(port, function() {
+		console.log('listening on *: %s', port);
+	});
+};
+
