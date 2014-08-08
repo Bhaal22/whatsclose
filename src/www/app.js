@@ -99,23 +99,18 @@ app.get('/', function(req, res) {
 /*
  * Ajax call to search band name
  */
-app.post('/bandSearch', function(req, res) {
-	console.log("Band Search");
-	console.log("param = " + req.body.bandName);
-	res.locals.title = 'Results';
+app.get('/bandSearch', function(req, res) {
+	var bandName = req.query.bandName;
 	
-	console.log('body: ' + JSON.stringify(req.body));
+	console.log("band name : " + bandName);
 	
-	var bandName = req.body.bandName;
-	
-	if (bandName) {
-		searcher.searchBandName(bandName, function(hits) {
-			console.log("app hits = " + hits);	
-			res.status(201).send(hits);
+	searcher.searchBandName(bandName)
+		.then(function(data) {
+			res.send(data);
+		}, function(err) {
+			console.log(err);
+			res.status(500).send(err);
 		});
-	} else {
-		res.status(201).send('');
-	}
 	
 });
 

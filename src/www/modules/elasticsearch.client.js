@@ -1,3 +1,6 @@
+/*
+ * TO REMOVE
+ */
 var elasticSearch = require('elasticsearch');
 var config = require('app-config');
 var elasticSearchClient;

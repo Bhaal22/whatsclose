@@ -7,9 +7,8 @@ $(document).ready(function() {
 function searchBandName() {
 	console.log("search band name");
 	$.ajax({
-		type: "POST",
-        url: '/bandSearch',
-        data: {bandName : $("#bandName").val()},
+		type: "GET",
+        url: '/bandSearch?bandName=' + $("#bandName").val(),
         timeout: 5000,
         success: function(data) {
             console.log("success");
@@ -44,10 +43,10 @@ function displayResult(data) {
 		html += "</div>";
 		html += "</div>";
 		
-		$("#result").append(html);
+		$("#resultList").append(html);
 		
 	}
 	
-	$("#result").show();
+	$("#resultList").show();
 	
 }
