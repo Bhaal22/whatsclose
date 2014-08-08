@@ -35,11 +35,11 @@ function displayResult(data) {
 		var html = "";
 		
 		html += "<div id='concert_'" + i + ">";
-		html += "<div style='float: left'>";
-		html += data[i].fields.location;
+		html += "<div style='float: left; width: 250px'>";
+		html += formatDate_MMMDDYYYY(new Date(data[i].fields.date));
 		html += "</div>";
 		html += "<div>";
-		html += new Date(data[i].fields.date);
+		html += data[i].fields.location;
 		html += "</div>";
 		html += "</div>";
 		
