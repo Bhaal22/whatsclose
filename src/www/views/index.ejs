@@ -10,11 +10,14 @@
     <script src="js/indexView.js"></script>
     <script src="js/utils.js"></script>
     
+    <!- Google Maps -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=set_to_true_or_false"></script>
+    
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <div>
+    <div id="search" style="width:400px;">
     
 
 		<%- label_for("bandName", "Band Name") %> 
@@ -24,13 +27,19 @@
 
     </div>
     
+    	<div id="map" style="width:700px; height:600px; float: right;"></div>
     
-    <div id="resultList" style="display: none">
+    <div id="resultList" style="width: 100%; display: none">
     	<div id="title">
     		<h2>Results</h2>
     	</div>
     </div>
     
+    
+    
+    <script>
+    	
+    </script>
     
   </body>
 </html>
