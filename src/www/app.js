@@ -114,6 +114,24 @@ app.get('/bandSearch', function(req, res) {
 	
 });
 
+/*
+ * Get ip to find geoloc ? or use geoloc api from HTML 5 ?
+ */
+function getClientIp(req) {
+	var ipAddress;
+
+	var forwardedIpsStr = req.header('x-forwarded-for');
+	if (forwardedIpsStr) {
+		var forwardedIps = forwardedIpsStr.split(',');
+		ipAddress = forwardedIps[0];
+	}
+	if (!ipAddress) {
+		ipAddress = req.connection.remoteAddress;
+	}
+	
+	return ipAddress;
+};
+
 module.exports.startServer = function(port) {
 	server.listen(port, function() {
 		console.log('listening on *: %s', port);

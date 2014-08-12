@@ -19,7 +19,7 @@ exports.searchBandName = function (bandName) {
 		console.log("search band name : " + bandName);
 		
 		var qryObj = {
-			"fields" : ["bandName", "location", "date"], // Fields to return
+			"fields" : ["bandName", "location", "date", "geometry"], // Fields to return
 			"size" : 100, // Number of results to return
 			"query" : {
 				"term" : {"bandName": bandName}
