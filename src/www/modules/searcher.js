@@ -3,8 +3,12 @@
  */
 
 var config = require('app-config');
+var Q = require('q');
 var ElasticSearchClient = require('elasticsearchclient');
 var Promise = require('es6-promise').Promise;
+
+var bandNameQuery = require('../queries/queries').bandNameQuery;
+var allSylesQuery = require('../queries/queries').allSylesQuery;
 
 var serverOptions = {
 	host: config.es.hostname,
@@ -18,13 +22,7 @@ exports.searchBandName = function (bandName) {
 		
 		console.log("search band name : " + bandName);
 		
-		var qryObj = {
-			"fields" : ["bandName", "location", "date", "geometry"], // Fields to return
-			"size" : 100, // Number of results to return
-			"query" : {
-				"term" : {"bandName": bandName}
-			}
-		};
+		var qryObj = bandNameQuery(bandName);
 		
 		elasticSearchClient.search(config.es.index, config.es.type, qryObj).
 			on('data', function(data) {
@@ -39,6 +37,26 @@ exports.searchBandName = function (bandName) {
 		
 	});
 	
+};
+
+exports.getAllStyles = function() {
+	console.log("get all styles");
+	
+	var deferred = Q.defer();
+	console.log(allSylesQuery);
+	
+	elasticSearchClient.search(config.es.index, config.es.type, allSylesQuery)
+		.on('data', function(data) {
+			console.log(data);
+			deferred.resolve(JSON.parse(data).aggregations.styles.buckets);
+		})
+		.on('error', function(error) {
+			console.log(error);
+			deferred.reject(error);
+		})
+		.exec();
+	
+	return deferred.promise;
 };
 
 

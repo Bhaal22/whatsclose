@@ -93,13 +93,34 @@ helpers(app);
  * Index
  */
 app.get('/', function(req, res) {
-	res.render('index', { title: 'The index page!' });
+	var params = {};
+	params.title = "The JC page!";
+	
+	searcher.getAllStyles()
+		.then(function(data) {
+			params.styles = data;
+			
+			res.render('index', params);
+			
+		}, function(error) {
+			console.log(error);
+			
+			res.render('index', params);
+		});
+
 });
 
 /*
  * Ajax call to search band name
  */
 app.get('/bandSearch', function(req, res) {
+	
+	
+	
+		
+	
+	
+	
 	var bandName = req.query.bandName;
 	
 	console.log("band name : " + bandName);

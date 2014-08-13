@@ -27,6 +27,24 @@
 
     </div>
     
+    <div id="filters" style="width:400px;">
+    	<div id="title" style="height: 20px">
+    		<h4>Filters</h4>
+    	</div>
+    	<div>
+    	<% 
+    		var styleOptions = [{"value": "", "text" : ""}];
+    		if (locals.styles) {
+    			for (var i = 0; i < styles.length; i++) {
+    				styleOptions.push({"value" : styles[i].key, "text" : styles[i].key + " (" + styles[i].doc_count + " doc)"});
+    			}
+    		}
+    	%>
+    	
+    	Style <%- select_tag("stylesSelect", styleOptions) -%>
+    	</div>
+    </div>
+    
     	<div id="map" style="width:700px; height:600px; float: right;"></div>
     
     <div id="resultList" style="width: 100%; display: none">
