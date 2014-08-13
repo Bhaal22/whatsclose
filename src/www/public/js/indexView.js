@@ -2,6 +2,7 @@
  * New node file
  */
 var map;
+var markers = [];;
 
 $(document).ready(function() {
 	
@@ -18,7 +19,8 @@ $(document).ready(function() {
 	    		var markerClient = new google.maps.Marker({
 	    			position: clientPos,
 	    			map: map,
-	    			title: 'You are here'
+	    			title: 'You are here',
+	    			icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 	    		});
 	    		
 	    		map.panTo(clientPos);
@@ -57,6 +59,9 @@ $(document).ready(function() {
 
 function searchBandName() {
 	console.log("search band name");
+	
+	clearMarkers();
+	
 	$.ajax({
 		type: "GET",
         url: '/bandSearch?bandName=' + $("#bandName").val(),
@@ -120,4 +125,13 @@ function addMarker(lat, lng, title) {
         map: map,
         title: title
     });
+	
+	markers.push(marker);
+}
+
+function clearMarkers() {
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+	markers.length = 0;
 }
