@@ -6,6 +6,7 @@ var config = require('app-config');
 var Q = require('q');
 var ElasticSearchClient = require('elasticsearchclient');
 var Promise = require('es6-promise').Promise;
+var winston = require ('winston');
 
 var bandNameQuery = require('../queries/queries').bandNameQuery;
 var allSylesQuery = require('../queries/queries').allSylesQuery;
@@ -26,8 +27,15 @@ exports.searchBandName = function (bandName) {
 		
 		elasticSearchClient.search(config.es.index, config.es.type, qryObj).
 			on('data', function(data) {
-				console.log(data);
-				resolve(JSON.parse(data).hits.hits);
+
+        var json = JSON.parse(data);
+
+        if (json.status === 404) {
+          resolve([]);
+        }
+        else {
+				  resolve(json.hits.hits);
+        }
 			})
 			.on('error', function(err) {
 				console.log(err);
@@ -43,12 +51,18 @@ exports.getAllStyles = function() {
 	console.log("get all styles");
 	
 	var deferred = Q.defer();
-	console.log(allSylesQuery);
+	winston.info(allSylesQuery);
 	
 	elasticSearchClient.search(config.es.index, config.es.type, allSylesQuery)
 		.on('data', function(data) {
-			console.log(data);
-			deferred.resolve(JSON.parse(data).aggregations.styles.buckets);
+      var json = JSON.parse(data);
+
+      if (json.status === 404) {
+        
+        deferred.resolve ([]);
+      } else {
+        deferred.resolve(json.aggregations.styles.buckets);
+      }
 		})
 		.on('error', function(error) {
 			console.log(error);

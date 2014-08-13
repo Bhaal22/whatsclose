@@ -86,34 +86,38 @@ function displayResult(data) {
 	// Remove old data
 	$('[id^="concert_"]').remove();
 	
-	for (var i = 0; i < data.length; i++) {
+  var html = '';
+  if (data.length === 0) {
+    html = "<div>No dates found</div>";
+  } else {
+	  for (var i = 0; i < data.length; i++) {
 
-		console.log("geo : %j", data[i].fields.geometry);
-		
-		var lat,lng;
-		if (data[i].fields.geometry) {
-			var geometry = data[i].fields.geometry[0].split(",");
-			lat = geometry[0];
-			lng = geometry[1];
-			
-			addMarker(lat, lng, data[i].fields.location[0]);
-		}
-		
-		var html = "";
-		
-		html += "<div id='concert_'" + i + ">";
-		html += "<div style='float: left; width: 250px'>";
-		html += formatDate_MMMDDYYYY(new Date(data[i].fields.date));
-		html += "</div>";
-		html += "<div>";
-		html += data[i].fields.location;
-		html += "</div>";
-		html += "</div>";
-		
-		$("#resultList").append(html);
-		
-	}
-	
+		  console.log("geo : %j", data[i].fields.geometry);
+		  
+		  var lat,lng;
+		  if (data[i].fields.geometry) {
+			  var geometry = data[i].fields.geometry[0].split(",");
+			  lat = geometry[0];
+			  lng = geometry[1];
+			  
+			  addMarker(lat, lng, data[i].fields.location[0]);
+		  }
+		  
+		  html += "<div id='concert_'" + i + ">";
+		  html += "<div style='float: left; width: 250px'>";
+		  html += formatDate_MMMDDYYYY(new Date(data[i].fields.date));
+		  html += "</div>";
+		  html += "<div>";
+		  html += data[i].fields.location;
+		  html += "</div>";
+		  html += "</div>";
+		  
+		  
+	  }
+  }
+
+  console.log (html);
+	$("#resultList").append(html);
 	$("#resultList").show();
 	
 }
