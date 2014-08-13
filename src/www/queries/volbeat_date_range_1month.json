@@ -1,0 +1,14 @@
+"query": {
+  "filtered": {
+    "query": { "match" : { "bandName": "volbeat"},
+             },
+    "filter": {
+      "range": {
+        "concertDate": {
+          "from": "now",
+          "to": "now+1M"
+        }
+      }
+    }
+  }    
+}
