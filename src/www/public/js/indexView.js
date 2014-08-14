@@ -6,6 +6,9 @@ var markers = [];;
 
 $(document).ready(function() {
 	
+	$("#fromDate").datepicker();
+	$("#toDate").datepicker();
+		
 	var clientPos;
 	if(navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(
@@ -34,23 +37,23 @@ $(document).ready(function() {
 		    });
 	    
     } else {
-	    alert("Ce navigateur ne supporte pas la géolocalisation");
+	    alert("Ce navigateur ne supporte pas la gï¿½olocalisation");
 	}
 	
 	
-	// Position par défaut
+	// Position par dï¿½faut
 	var centerpos = new google.maps.LatLng(43.580417999999995,7.125102);
 	
-	// Options relatives à la carte
+	// Options relatives ï¿½ la carte
 	var optionsGmaps = {
 	    center: centerpos,
 	    mapTypeId: google.maps.MapTypeId.ROADMAP,
 	    zoom: 5
 	};
-	// ROADMAP peut être remplacé par SATELLITE, HYBRID ou TERRAIN
-	// Zoom : 0 = terre entière, 19 = au niveau de la rue
+	// ROADMAP peut ï¿½tre remplacï¿½ par SATELLITE, HYBRID ou TERRAIN
+	// Zoom : 0 = terre entiï¿½re, 19 = au niveau de la rue
 	 
-	// Initialisation de la carte pour l'élément portant l'id "map"
+	// Initialisation de la carte pour l'ï¿½lï¿½ment portant l'id "map"
 	map = new google.maps.Map(document.getElementById("map"), optionsGmaps);
 	
 	
@@ -64,7 +67,12 @@ function searchBandName() {
 	
 	$.ajax({
 		type: "GET",
-        url: '/bandSearch?bandName=' + $("#bandName").val(),
+		url : '/bandSearch',
+        data: {
+        	"bandName" : $("#bandName").val(),
+        	"fromDate" : $.datepicker.parseDate("mm/dd/yy", $("#fromDate").val()),
+        	"toDate" : $.datepicker.parseDate("mm/dd/yy", $("#toDate").val())
+        },
         timeout: 5000,
         success: function(data) {
             console.log("success");
@@ -85,10 +93,11 @@ function displayResult(data) {
 	
 	// Remove old data
 	$('[id^="concert_"]').remove();
+	$("#noDateFound").remove();
 	
   var html = '';
   if (data.length === 0) {
-    html = "<div>No dates found</div>";
+    html = "<div id='noDateFound'>No dates found</div>";
   } else {
 	  for (var i = 0; i < data.length; i++) {
 

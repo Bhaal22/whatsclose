@@ -122,11 +122,10 @@ app.get('/', function(req, res) {
  * Ajax call to search band name
  */
 app.get('/bandSearch', function(req, res) {
-	var bandName = req.query.bandName;
 	
-	console.log("band name : " + bandName);
+	console.log("params : %j", req.query);
 	
-	searcher.searchBandName(bandName)
+	searcher.search(req.query)
 		.then(function(data) {
 			res.send(data);
 		}, function(err) {

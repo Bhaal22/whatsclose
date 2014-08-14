@@ -6,12 +6,25 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     -->
     
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <script src="js/indexView.js"></script>
     <script src="js/utils.js"></script>
     
     <!- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=set_to_true_or_false"></script>
+    
+    
+    
+    
+    <style type="text/css">
+    	div.ui-datepicker{
+			font-size:10px;
+		}
+    </style>
+    
+    
     
   </head>
   <body>
@@ -28,22 +41,30 @@
     </div>
     
     <div id="filters" style="width:400px;">
-    	<div id="title" style="height: 20px">
-    		<h4>Filters</h4>
-      	</div>
-      <div>
-        <% 
-           var styleOptions = [{"value": "", "text" : ""}];
-    		   if (locals.styles) {
-    			   for (var i = 0; i < styles.length; i++) {
-    			     styleOptions.push({"value" : styles[i].key, "text" : styles[i].key + " (" + styles[i].doc_count + " doc)"});
-             }
-           }
-        %>
+		<div id="title" style="height: 20px">
+			<h4>Filters</h4>
+		</div>
+		<div>
+	        <% 
+	           var styleOptions = [{"value": "", "text" : ""}];
+	    		   if (locals.styles) {
+	    			   for (var i = 0; i < styles.length; i++) {
+	    			     styleOptions.push({"value" : styles[i].key, "text" : styles[i].key + " (" + styles[i].doc_count + " doc)"});
+	             }
+	           }
+	        %>
         
-        Style <%- select_tag("stylesSelect", styleOptions) -%>
-    	 </div>
-    </div>
+        	Style <%- select_tag("stylesSelect", styleOptions) -%>
+		</div>
+		<div id="from" style="float: left">
+			<%- label_for("fromDate", "From") %> 
+		  	<%- text_field_tag("fromDate", {"size": 15, "maxlength": 15}) %>
+		</div>
+		<div id="to">
+			<%- label_for("toDate", "To") %> 
+		  	<%- text_field_tag("toDate", {"size": 15, "maxlength": 15}) %>
+		</div>
+	</div>
     
     <div id="map" style="width:700px; height:600px; float: right;"></div>
     
