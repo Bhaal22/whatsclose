@@ -80,10 +80,17 @@ var app = express();
 var server = http.Server(app);
 
 console.log("setting ejs engine");
+
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({
+  extended: true 
+}));
+
 app.use(bodyParser.json() );
-app.use(bodyParser.urlencoded());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 console.log("setting helpers");
@@ -98,12 +105,13 @@ app.get('/', function(req, res) {
 	
 	searcher.getAllStyles()
 		.then(function(data) {
-			params.styles = data;
 			
+      params.styles = data;
+
 			res.render('index', params);
 			
 		}, function(error) {
-			console.log(error);
+			console.log("error: %s", error);
 			
 			res.render('index', params);
 		});
@@ -115,17 +123,9 @@ app.get('/', function(req, res) {
  */
 app.get('/bandSearch', function(req, res) {
 	
+	console.log("params : %j", req.query);
 	
-	
-		
-	
-	
-	
-	var bandName = req.query.bandName;
-	
-	console.log("band name : " + bandName);
-	
-	searcher.searchBandName(bandName)
+	searcher.search(req.query)
 		.then(function(data) {
 			res.send(data);
 		}, function(err) {

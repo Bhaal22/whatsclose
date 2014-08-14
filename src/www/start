@@ -1,9 +1,0 @@
-#!/usr/bin/env node
-var config = require('app-config');
-var version = require('./modules/utils/version');
-
-console.log(config.settings.application.name +" "+ version.getFormattedVersion() + " started.");
-
-var startServer = require('./app').startServer;
-
-startServer(config.settings.web.port);
