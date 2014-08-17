@@ -1,15 +1,10 @@
 exports.bandNameQuery = function(bandName) {
 	var query = {
-		"fields" : ["bandName", "location", "date", "geometry"], // Fields to return
 		"size" : 100, // Number of results to return
-		"query" : 
-		{
-			"filtered" : 
-			{
-				"query" : 
-				{
-					"match" : 
-					{
+		"query" : {
+			"filtered" : {
+				"query" : {
+					"match" : {
 						"bandName": bandName
 					}
 				}
@@ -50,7 +45,6 @@ exports.filterQuery = function(fromDate, toDate) {
 //		"gt" : "now", // From
 //		"lt" : "now+1M" // To
 		if (fromDate) {
-			console.log("lol");
 			filter.range.date.gt = new Date(fromDate);
 		}
 		

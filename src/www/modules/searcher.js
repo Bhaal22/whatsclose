@@ -24,30 +24,27 @@ exports.search= function (params) {
 	
 	var query = bandNameQuery(params.bandName);
 	var filter = filterQuery(params.fromDate, params.toDate);
-	
-	console.log("query : %j", query);
-	console.log("filter : %j", filter);
+
 	if (filter) {
 		query.filter = filter;
 	}
-	
-	elasticSearchClient.search(config.es.index, config.es.type, query).on(
-		'data', function(data) {
-	
-		var json = JSON.parse(data);
-	
-		if (json.status === 404) {
-			deferred.resolve([]);
-		} else {
-			deferred.resolve(json.hits.hits);
-		}
-	}).on('error', function(err) {
-		console.log(err);
-		reject(err);
-	}).exec();
+
+	elasticSearchClient.search(config.es.index, config.es.type, query)
+    .on('data', function(data) {
+	    
+		  var json = JSON.parse(data);
+	    
+		  if (json.status === 404) {
+			  deferred.resolve([]);
+		  } else {
+			  deferred.resolve(json.hits.hits);
+		  }
+	  }).on('error', function(err) {
+		  console.log(err);
+		  reject(err);
+	  }).exec();
 	
 	return deferred.promise;
-	
 };
 
 exports.getAllStyles = function() {
