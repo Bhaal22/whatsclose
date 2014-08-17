@@ -80,6 +80,25 @@ router.route('/concerts')
     });
   });
 
+router.route('/styles')
+  .get (function (req, res) {
+    var p = searcher.getAllStyles();
+
+    p.then (function (data) {
+      res.json(data);
+    });
+  })
+  .post (function (req, res) {
+
+    var params = {
+      styles: req.body.styles,
+      fromDate: req.body.fromDate,
+      toDate: req.body.toDate
+    };
+
+    //TODO
+  });
+
 app.use('/api', router);
 
 /*

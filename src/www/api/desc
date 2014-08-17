@@ -1,0 +1,10 @@
+POST /api/concerts
+     bandName
+     fromDate
+     toDate
+
+GET  /api/styles
+POST /api/styles
+     styles
+     fromDate
+     toDate

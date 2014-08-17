@@ -34,7 +34,9 @@ exports.search= function (params) {
 	    
 		  var json = JSON.parse(data);
 	    
-		  if (json.status === 404) {
+      console.log(json.status);
+      console.log(json);
+		  if ((json.status === 404) || (json.status === 400)) {
 			  deferred.resolve([]);
 		  } else {
 			  deferred.resolve(json.hits.hits);
