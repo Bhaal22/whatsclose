@@ -1,0 +1,141 @@
+GET /whatsclose/multiple.concert/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET whatsclose/multiple.concert/_count
+GET whatsclose/concert/_count
+
+GET whatsclose/concert/_search
+{
+  "query": {
+      "match_all": {}
+    }
+    
+  }
+}
+
+GET whatsclose/concert/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "bandName" : "Volbeat"}},
+        { "match": { "date": "2014-09-17T22:00:00.000Z" }}
+      ]
+    }
+  }
+}
+
+GET /whatsclose/multiple.concert/tbt4xmbvTQaJGPXqFH7Xig
+
+DELETE /whatsclose
+DELETE /whatsclose/multiple.concert
+
+DELETE /whatsclose_dev
+
+GET whatsclose/concert/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "bandName" : "Volbeat"}},
+        { "match": { "date": "2014-11-16T23:00:00.000Z" }},
+        { "match": { "location": "GB, London" }}
+      ]
+    }
+  }
+}
+
+GET whatsclose/multiple.concert/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "bandName": "volbeat" }},
+        { "match": {
+          "date": "2014-10-23T22:00:00.000Z" }
+        }
+      ]
+    }
+  }
+}
+
+GET whatsclose/concert/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "band_name" : "test"}},
+        { "match": { "date": "2014-09-01" }},
+        { "match": { "location": "fake" }}
+      ]
+    }
+  }
+}
+
+GET /whatsclose/concert/_mapping
+GET whatsclose/multiple.concert/_mapping
+
+GET /whatsclose_dev/_count
+
+POST _aliases
+{
+"actions": [
+  {
+    "add": {
+      "index": "whatsclose_dev",
+      "alias": "whatsclose"
+    }
+  }
+]
+}
+
+
+GET whatsclose_dev/concert/_search
+{
+  "query": {
+    "match": {
+      "location": "US, Louisville, KY"
+    }
+  },
+  "sort": [
+    {
+      "date": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+Get whatsclose_dev/concert/0LB4Y7_eTvm6s9k-I88VxQ
+
+POST whatsclose_dev/concert/0LB4Y7_eTvm6s9k-I88VxQ/_update
+{
+  "script": "ctx._source.date = \"2014-10-04T22:00:00.000Z\""
+}
+
+GET whatsclose_dev/concert/_search
+{
+  "size": 100,
+  "query": {
+    "filtered": {
+      "query": {
+        "match": {
+          "bandName": "volbeat"
+        }
+      },
+      "filter": {
+        "range": {
+          "date": {
+            "from": "2014-08-17T19:43:23.972Z",
+            "to": "2014-10-01T00:00:00.000Z"
+          }
+        }
+      }
+    }
+  }
+}
+
