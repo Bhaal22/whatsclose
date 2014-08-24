@@ -1,9 +1,11 @@
+//var styles = new ConcertStyles();
+
 
 define([
   'jquery',
   'underscore',
   'backbone',
-  'views/IndexView',
+  'views/IndexView'
 ], function ($, _, Backbone, IndexView) {
   
   var MainRouter = Backbone.Router.extend({
@@ -17,7 +19,15 @@ define([
     defaultAction: function (){
       var indexView = new IndexView();
       indexView.render();
-      
+
+      // var concertStylesView = new ConcertStylesView();
+      // concertStylesView.render();
+
+      // setTimeout(function(){
+      //   Styles.fetch();
+      //   //create views
+      //   var list_view = new ConcertStylesView({model: ConcertStyle});
+      // }, 2000);
       console.log("default route");
     },
 

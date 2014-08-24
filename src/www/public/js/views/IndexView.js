@@ -1,8 +1,9 @@
+
 define([
   'jquery',
   'underscore',
   'backbone',
-  'text!/templates/mainTemplate.html' 
+  'text!/templates/mainTemplate.html',
 ], function($, _, Backbone, mainTemplate){
   
   var MainView = Backbone.View.extend({
@@ -15,7 +16,6 @@ define([
       
       that.controls = $('.nav_controls');
       that.map_controls = $('#map_controls');
-      that.styles = $('.styles');
 
       that.map_canvas = {};
 
