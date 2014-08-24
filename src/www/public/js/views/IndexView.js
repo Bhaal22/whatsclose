@@ -6,7 +6,7 @@ define([
 ], function($, _, Backbone, mainTemplate){
   
   var MainView = Backbone.View.extend({
-    el: '.container',
+    el:  'body',
     initialize: function () {
     },
     render: function () {
@@ -16,10 +16,9 @@ define([
       that.controls = $('.nav_controls');
       that.map_controls = $('#map_controls');
 
-      that.map = {};
+      that.map_canvas = {};
 
       that._initialize_map ();
-      
       that.show_map ();
 		},
     
@@ -41,8 +40,8 @@ define([
           center: center,
           styles: styles
       };
-      this.map = new google.maps.Map(document.getElementById('map'),
-                                     mapOptions);
+      this.map_canvas = new google.maps.Map(document.getElementById('map_canvas'),
+                                            mapOptions);
     },
 
     show_map: function (){
@@ -55,7 +54,8 @@ define([
       self.controls.hide();
 
       //resize map canvas. make map 100%
-      // self.map.animate({height: '100%'}, speed);
+//      console.log(self.map_canvas.animate);
+  //    self.map_canvas.animate({height: '100%'}, speed);
 
       setTimeout(function(){
         //show map controls
