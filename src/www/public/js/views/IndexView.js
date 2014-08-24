@@ -15,6 +15,7 @@ define([
       
       that.controls = $('.nav_controls');
       that.map_controls = $('#map_controls');
+      that.styles = $('.styles');
 
       that.map_canvas = {};
 

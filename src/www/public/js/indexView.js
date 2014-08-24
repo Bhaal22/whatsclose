@@ -37,7 +37,7 @@ $(document).ready(function() {
 		    });
 	    
     } else {
-	    alert("Ce navigateur ne supporte pas la g�olocalisation");
+	    alert("Ce navigateur ne supporte pas la geolocalisation");
 	}
 	
 	
