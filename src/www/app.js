@@ -41,12 +41,12 @@ app.get('/', function(req, res) {
 			
       params.styles = data;
 
-			res.render('index', params);
+			res.render('index2', params);
 			
 		}, function(error) {
 			console.log("error: %s", error);
 			
-			res.render('index', params);
+			res.render('index2', params);
 		});
 
 });
