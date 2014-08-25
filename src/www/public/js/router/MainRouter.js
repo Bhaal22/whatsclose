@@ -5,8 +5,10 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'views/IndexView'
-], function ($, _, Backbone, IndexView) {
+  'views/IndexView',
+  'views/ConcertStylesView',
+  'collections/concert.styles'
+], function ($, _, Backbone, IndexView, ConcertStylesView, ConcertStyles) {
   
   var MainRouter = Backbone.Router.extend({
     routes: {
@@ -20,13 +22,21 @@ define([
       var indexView = new IndexView();
       indexView.render();
 
-      // var concertStylesView = new ConcertStylesView();
-      // concertStylesView.render();
+      var styles = new ConcertStyles();
+      styles.fetch ({
+        "success": function (collection, response) {
+          //console.dir(collection);
+          //console.dir(response);
+
+          var concertStylesView = new ConcertStylesView();
+          concertStylesView.render();
+        }
+        });
 
       // setTimeout(function(){
-      //   Styles.fetch();
+      //   styles.fetch();
       //   //create views
-      //   var list_view = new ConcertStylesView({model: ConcertStyle});
+      //    var list_view = new ConcertStylesView();
       // }, 2000);
       console.log("default route");
     },
@@ -38,52 +48,3 @@ define([
 
   return new MainRouter();
 });
-
-// define([
-//   'jquery',
-//   'underscore',
-//   'backbone',
-//   'views/IndexView',
-// ], function ($, _, Backbone, IndexView) {
-  
-//   var MainRouter = Backbone.Router.extend({
-//     routes: {
-//       '*actions': 'defaultAction',
-//       'messages': 'showMessageAboutMongo', // All urls will trigger this route
-//       'about': 'showAbout' 
-//     },
-    
-//   });
-
-//   var init = function(){
-//     var router = new MainRouter();
-
-//     console.log("MainRouter / initialize");
-
-// 		router.on('route:defaultAction', function (actions) {
-
-//         var indexView = new IndexView();
-//         indexView.render();
-
-//         console.log("default route");
-        
-// 		});
-
-//     router.on('route:showMessageAboutMongo', function () {
-
-//       console.log("display helpful message about setting up mongo");
-//     });
-
-//     router.on('route:showAbout', function () {
-
-//       console.log("display about");
-        
-//     });
-
-//     Backbone.history.start({ pushState: true });
-    
-//   };
-//   return {
-//     initialize: init
-//   };
-// });

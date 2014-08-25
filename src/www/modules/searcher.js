@@ -50,8 +50,6 @@ exports.search= function (params) {
 };
 
 exports.getAllStyles = function() {
-	console.log("get all styles");
-	
 	var deferred = Q.defer();
 	winston.info(allSylesQuery);
 	
