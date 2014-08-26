@@ -8,19 +8,19 @@ define([
   
   var MainView = Backbone.View.extend({
     el:  '#container',
-    initialize: function () {
+    
+    initialize: function (options) {
+      _.bindAll(this, 'render', '_initialize_map', '_onLocationUpdated');
+      options.vent.bind('updateLocation', this._onLocationUpdated);
     },
+
     render: function () {
 			var that = this;
       $(this.el).html(mainTemplate);
       
-      that.controls = $('.nav_controls');
-      that.map_controls = $('#map_controls');
-
-      that.map_canvas = {};
+      that.map_container = {};
 
       that._initialize_map ();
-      that.show_map ();
 		},
     
     _initialize_map : function() {
@@ -41,29 +41,20 @@ define([
           center: center,
           styles: styles
       };
-      this.map_canvas = new google.maps.Map(document.getElementById('map_canvas'),
+      this.map_container = new google.maps.Map(document.getElementById('map-container'),
                                             mapOptions);
     },
 
-    show_map: function (){
-      var self = this;
-      var speed = 800;
+    _onLocationUpdated : function(location){
+      var marker = new google.maps.Marker({
+        'map': this.map_container,
+        'position': location
+      });
 
-      //hide content
-
-      //hide controls
-      self.controls.hide();
-
-      //resize map canvas. make map 100%
-//      console.log(self.map_canvas.animate);
-  //    self.map_canvas.animate({height: '100%'}, speed);
-
-      setTimeout(function(){
-        //show map controls
-        self.map_controls.css({top: '80%'});
-        self.map_controls.fadeIn();
-      }, speed);
+      this.map_container.setCenter(location);
+          
     }
+
 	});
   return MainView;
 

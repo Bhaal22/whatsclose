@@ -116,7 +116,7 @@ body {
 	border-radius: 0 0 5px 5px;
 }
 
-#map_canvas {
+#map-container {
 	z-index: -1;
 	position: absolute;
 	top: 0;

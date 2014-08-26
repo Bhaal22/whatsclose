@@ -6,9 +6,8 @@ define([
   'underscore',
   'backbone',
   'views/IndexView',
-  'views/ConcertStylesView',
-  'collections/concert.styles'
-], function ($, _, Backbone, IndexView, ConcertStylesView, ConcertStyles) {
+  'views/LocationView'
+], function ($, _, Backbone, IndexView, LocationView) {
   
   var MainRouter = Backbone.Router.extend({
     routes: {
@@ -16,28 +15,30 @@ define([
       'about': 'showAbout' 
     },
     initialize: function () {
+      
+
     },
 
     defaultAction: function (){
-      var indexView = new IndexView();
+      var vent = _.extend({}, Backbone.Events);
+
+      var indexView = new IndexView({'vent':vent});
       indexView.render();
 
-      var styles = new ConcertStyles();
-      styles.fetch ({
-        "success": function (collection, response) {
-          //console.dir(collection);
-          //console.dir(response);
+      var locationView = new LocationView({'vent': vent, 'location': '#menu'});
+      locationView.render();
 
-          var concertStylesView = new ConcertStylesView(response);
-          concertStylesView.render();
-        }
-        });
+      // var styles = new ConcertStyles();
+      // styles.fetch ({
+      //   "success": function (collection, response) {
+      //     //console.dir(collection);
+      //     //console.dir(response);
 
-      // setTimeout(function(){
-      //   styles.fetch();
-      //   //create views
-      //    var list_view = new ConcertStylesView();
-      // }, 2000);
+      //     var concertStylesView = new ConcertStylesView(response);
+      //     concertStylesView.render();
+      //   }
+      //   });
+
       console.log("default route");
     },
 
