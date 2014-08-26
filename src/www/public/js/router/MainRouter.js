@@ -28,7 +28,7 @@ define([
           //console.dir(collection);
           //console.dir(response);
 
-          var concertStylesView = new ConcertStylesView();
+          var concertStylesView = new ConcertStylesView(response);
           concertStylesView.render();
         }
         });

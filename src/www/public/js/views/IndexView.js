@@ -7,7 +7,7 @@ define([
 ], function($, _, Backbone, mainTemplate){
   
   var MainView = Backbone.View.extend({
-    el:  'body',
+    el:  '#container',
     initialize: function () {
     },
     render: function () {

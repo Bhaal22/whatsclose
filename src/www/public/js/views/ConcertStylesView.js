@@ -4,43 +4,28 @@ define([
   'backbone'
 ], function($, _, Backbone){
 
-  var ConcertStyleView = Backbone.View.extend({
-    tagName: "option",
-    
-    initialize: function(){
-      _.bindAll(this, 'render');
-    },
-    render: function(){
-
-      console.log('rendering ConcertStyle View ...');
-      // $(this.el).attr('value',
-      //                 this.model.get('id')).html(this.model.get('name'));
-      return this;
-    }
-  });
-
   var ConcertStylesView = Backbone.View.extend({
-    el:  $("#concert.styles"),
+    el:  '#concertstyles',
 
-    initialize: function(){
+    initialize: function(response){
+      this.collection = response;
+      
       _.bindAll(this, 'addOne', 'addAll');
-      this.collection.bind('reset', this.addAll);
+      //this.collection.bind('reset', this.addAll);
     },
 
     addOne: function(country){
-      $(this.el).append(
-        new ConcertStyleView().render().el);
+      $(this.el).append(new Option(country.key, country.key));
     },
     addAll: function(){
-      this.collection.each(this.addOne);
+      this.collection.forEach(this.addOne);
     },
 
-    render: function(styles) {
-      this.collection = styles;
+    render: function() {
       this.addAll();
     }
 
   });
   
-  return ConcertStyleView;
+  return ConcertStylesView;
 });

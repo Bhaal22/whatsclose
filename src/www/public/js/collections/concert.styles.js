@@ -16,7 +16,7 @@ define([
    
 
     parse: function(response) {
-      console.log(response[0]);
+      //console.log(response[0]);
     }
   });
   
