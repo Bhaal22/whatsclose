@@ -27,35 +27,46 @@ exports.allSylesQuery = {
 };
 
 
-exports.filterQuery = function(fromDate, toDate) {
+exports.filterByDate = function(from, to) {
 
-	console.log(fromDate);
 	var filter = "";
-	if (fromDate || toDate) {
+	if (from || to) {
 		filter = {
 			"range" : {
 				"date" : {
 				}
 			}
 		};
-		
-		console.log(filter);
-		
-		
-//		"gt" : "now", // From
-//		"lt" : "now+1M" // To
-		if (fromDate) {
-			filter.range.date.gt = fromDate;
+
+		if (from) {
+			filter.range.date.gt = from;
 		}
 		
-		console.log(filter);
-		
-		if (toDate) {
-			filter.range.date.lt = toDate;
+		if (to) {
+			filter.range.date.lt = to;
 		}
 	}
 	
 	return filter;
 }
 
+exports.filterByGeolocation = function (position) {
+  var filter = "";
+
+  if (position) {
+
+    var geo_position = position.split(',');
+    console.dir(geo_position);
+    filter = {
+      "geo_distance" : {
+        "distance" : "200km",
+        "geometry" : {
+          "lat" : geo_position[0],
+          "lon" : geo_position[1]
+        }
+      }
+    }
+  }
+  return filter;
+}
 

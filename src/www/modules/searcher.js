@@ -10,7 +10,8 @@ var winston = require ('winston');
 
 var bandNameQuery = require('../queries/queries').bandNameQuery;
 var allSylesQuery = require('../queries/queries').allSylesQuery;
-var filterQuery = require('../queries/queries').filterQuery;
+var filterByDate = require('../queries/queries').filterByDate;
+var filterByGeolocation = require('../queries/queries').filterByGeolocation;
 
 var serverOptions = {
 	host: config.es.hostname,
@@ -23,11 +24,17 @@ exports.search= function (params) {
 	var deferred = Q.defer();
 	
 	var query = bandNameQuery(params.bandName);
-  var filter = filterQuery(params.from, params.to);
-
-	if (filter) {
-		query.filter = filter;
+  var dateFilter = filterByDate(params.from, params.to);
+  var geolocFilter = filterByGeolocation(params.location);
+  
+	/*if (dateFilter) {
+		query.filter = dateFilter;
+  }*/
+  
+  if (geolocFilter) {
+    query.filter = geolocFilter;
   }
+
 
 	elasticSearchClient.search(config.es.index, config.es.type, query)
     .on('data', function(data) {
