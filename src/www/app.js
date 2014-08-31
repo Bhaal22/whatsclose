@@ -8,6 +8,8 @@ var path = require('path');
 var app = express();
 var server = http.Server(app);
 
+require('datejs');
+
 console.log("setting ejs engine");
 
 app.set('views', __dirname + '/views');
@@ -41,12 +43,12 @@ app.get('/', function(req, res) {
 			
       params.styles = data;
 
-			res.render('index', params);
+			res.render('index2', params);
 			
 		}, function(error) {
 			console.log("error: %s", error);
 			
-			res.render('index', params);
+			res.render('index2', params);
 		});
 
 });
@@ -59,18 +61,20 @@ router.route('/bands')
   });
 
 router.route('/concerts')
-  .post (function (req, res) {
+  .get (function (req, res) {
     var params = {
-      bandName: req.body.bandName,
-      fromDate: req.body.fromDate,
-      toDate: req.body.toDate
+      bandName: req.query.bandName,
+      from: req.query.from,
+      to: req.query.to
     };
+
+    //check params
     
 
     var p = searcher.search(params);
     p.then (function (data) {
       var jsonout = data.map (function (concert) {
-        return concert._source;     
+        return concert._source;
         });
 
       res.json ({
@@ -82,6 +86,7 @@ router.route('/concerts')
 
 router.route('/styles')
   .get (function (req, res) {
+    console.log ('styles from REST API');
     var p = searcher.getAllStyles();
 
     p.then (function (data) {

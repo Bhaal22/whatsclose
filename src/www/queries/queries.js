@@ -5,7 +5,7 @@ exports.bandNameQuery = function(bandName) {
 			"filtered" : {
 				"query" : {
 					"match" : {
-						"bandName": bandName
+						"bandName.exact": bandName
 					}
 				}
 			}
@@ -45,13 +45,13 @@ exports.filterQuery = function(fromDate, toDate) {
 //		"gt" : "now", // From
 //		"lt" : "now+1M" // To
 		if (fromDate) {
-			filter.range.date.gt = new Date(fromDate);
+			filter.range.date.gt = fromDate;
 		}
 		
 		console.log(filter);
 		
 		if (toDate) {
-			filter.range.date.lt = new Date(toDate);
+			filter.range.date.lt = toDate;
 		}
 	}
 	

@@ -23,11 +23,11 @@ exports.search= function (params) {
 	var deferred = Q.defer();
 	
 	var query = bandNameQuery(params.bandName);
-	var filter = filterQuery(params.fromDate, params.toDate);
+  var filter = filterQuery(params.from, params.to);
 
 	if (filter) {
 		query.filter = filter;
-	}
+  }
 
 	elasticSearchClient.search(config.es.index, config.es.type, query)
     .on('data', function(data) {
