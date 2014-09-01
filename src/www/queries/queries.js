@@ -55,6 +55,10 @@ exports.filterByDate = function(from, to) {
 exports.filterByGeolocation = function (position, radius) {
   var filter = "";
 
+  if (radius === undefined) {
+    radius = "1000km"
+  }
+
   if (position) {
 
     var geo_position = position.split(',');
