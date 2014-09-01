@@ -35,7 +35,7 @@ exports.filterByDate = function(from, to) {
 			"range" : {
 				"date" : {
 				}
-			}
+      }
 		};
 
 		if (from) {
@@ -45,28 +45,31 @@ exports.filterByDate = function(from, to) {
 		if (to) {
 			filter.range.date.lt = to;
 		}
+
+    return filter;
 	}
-	
-	return filter;
+
+  return null;
 }
 
-exports.filterByGeolocation = function (position) {
+exports.filterByGeolocation = function (position, radius) {
   var filter = "";
 
   if (position) {
 
     var geo_position = position.split(',');
-    console.dir(geo_position);
     filter = {
       "geo_distance" : {
-        "distance" : "200km",
+        "distance" : radius,
         "geometry" : {
           "lat" : geo_position[0],
           "lon" : geo_position[1]
         }
       }
     }
+    
+    return filter;
   }
-  return filter;
+  return null;
 }
 

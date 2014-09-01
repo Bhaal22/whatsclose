@@ -25,15 +25,29 @@ exports.search= function (params) {
 	
 	var query = bandNameQuery(params.bandName);
   var dateFilter = filterByDate(params.from, params.to);
-  var geolocFilter = filterByGeolocation(params.location);
+  var geolocFilter = filterByGeolocation(params.location, params.radius);
   
-	/*if (dateFilter) {
-		query.filter = dateFilter;
-  }*/
-  
-  if (geolocFilter) {
-    query.filter = geolocFilter;
+  query.filter = {
+    "bool" : {
+      "must": []
+    }
   }
+
+  if (dateFilter) {
+    query.filter.bool.must.push(dateFilter);
+  }
+
+  if (geolocFilter) {
+    query.filter.bool.must.push(geolocFilter);
+  }
+
+	// if (dateFilter) {
+	// 	query.filter = dateFilter;
+  // }
+  
+  // if (geolocFilter) {
+  //   query.filter = geolocFilter;
+  // }
 
 
 	elasticSearchClient.search(config.es.index, config.es.type, query)

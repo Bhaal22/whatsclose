@@ -66,11 +66,9 @@ router.route('/concerts')
       bandName: req.query.bandName,
       from: req.query.from,
       to: req.query.to,
-      location: req.query.location
+      location: req.query.location,
+      radius: req.query.radius
     };
-
-    //check params
-    
 
     var p = searcher.search(params);
     p.then (function (data) {
