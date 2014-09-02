@@ -53,6 +53,14 @@ app.get('/', function(req, res) {
 
 });
 
+app.get('/mobile', function(req, res) {
+  var params = {};
+  params.title = "The JC page!";
+  
+  res.render('mobile', params);
+  
+});
+
 var searcher = require('./modules/searcher');
 
 router.route('/bands')
