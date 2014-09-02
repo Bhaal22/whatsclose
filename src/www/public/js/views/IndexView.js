@@ -10,8 +10,9 @@ define([
     el:  '#container',
     
     initialize: function (options) {
-      _.bindAll(this, 'render', '_initialize_map', '_onLocationUpdated');
+      _.bindAll(this, 'render', '_initialize_map', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('updateLocation', this._onLocationUpdated);
+      options.vent.bind('concertsRetrieved', this._onConcertsRetrieved);
     },
 
     render: function () {
@@ -42,7 +43,7 @@ define([
           styles: styles
       };
       this.map_container = new google.maps.Map(document.getElementById('map-container'),
-                                            mapOptions);
+                                               mapOptions);
     },
 
     _onLocationUpdated : function(location){
@@ -53,6 +54,25 @@ define([
 
       this.map_container.setCenter(location);
           
+    },
+    
+    _onConcertsRetrieved: function (concerts) {
+      var self = this;
+      concerts.forEach (function (concert) {
+
+        var myLatlng = new google.maps.LatLng(concert.geometry.lat, concert.geometry.lon);
+        var marker = new google.maps.Marker({
+          'map': self.map_container,
+          'position': myLatlng,
+          'descr': myLatlng
+        });
+
+        google.maps.event.addListener(marker, 'click', self.show_concert_detail);
+      });
+    },
+
+    show_concert_detail: function () {
+      alert('toto');
     }
 
 	});

@@ -6,8 +6,9 @@ define([
   'underscore',
   'backbone',
   'views/IndexView',
-  'views/LocationView'
-], function ($, _, Backbone, IndexView, LocationView) {
+  'views/LocationView',
+  'views/SearchView',
+], function ($, _, Backbone, IndexView, LocationView, SearchView) {
   
   var MainRouter = Backbone.Router.extend({
     routes: {
@@ -25,19 +26,11 @@ define([
       var indexView = new IndexView({'vent':vent});
       indexView.render();
 
-      var locationView = new LocationView({'vent': vent, 'location': '#menu'});
-      locationView.render();
+      //var locationView = new LocationView({'vent': vent, 'location': '#menu'});
+      //locationView.render();
 
-      // var styles = new ConcertStyles();
-      // styles.fetch ({
-      //   "success": function (collection, response) {
-      //     //console.dir(collection);
-      //     //console.dir(response);
-
-      //     var concertStylesView = new ConcertStylesView(response);
-      //     concertStylesView.render();
-      //   }
-      //   });
+      var searchView = new SearchView ({ 'vent': vent, 'location': '#menu' });
+      searchView.render ();
 
       console.log("default route");
     },
