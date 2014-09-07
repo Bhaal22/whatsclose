@@ -36,9 +36,11 @@ define([
         data: { 
           bandName: $(this.band).val() },
         success: function (collection, response) {
+          console.log('coucou');
           console.dir(response);
+          console.dir(collection);
 
-          self.vent.trigger('concertsRetrieved', response.concerts);
+          self.vent.trigger('concertsRetrieved', response);
         }
       });
     }

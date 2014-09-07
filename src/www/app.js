@@ -84,10 +84,7 @@ router.route('/concerts')
         return concert._source;
         });
 
-      res.json ({
-        count: jsonout.length,
-        concerts: jsonout
-      });
+      res.json (jsonout);
     });
   });
 
