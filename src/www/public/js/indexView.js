@@ -6,6 +6,14 @@ var markers = [];;
 
 $(document).ready(function() {
 	
+	//Navigation Menu Slider
+	$('#big-expander').on('click',function(e){
+		alert('Fred was here');
+		e.preventDefault();
+		$('#big-expander').toggleClass('expanded');
+	});
+
+
 	$("#fromDate").datepicker();
 	$("#toDate").datepicker();
 		

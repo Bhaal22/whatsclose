@@ -1,0 +1,51 @@
+.expander {
+  background: none repeat scroll 0 0 #FFFFFF;
+  width: 66.6667%;
+  left:16.6667%;
+  position: fixed;
+  top: 0px;
+ 
+  transition: top 0.3s ease-in-out 0s;
+  -webkit-transition: top 0.3s ease-in-out 0s;
+  -moz-transition: top 0.3s ease-in-out 0s;
+  -o-transition: top 0.3s ease-in-out 0s;
+ 
+}
+
+.expander:hover,.expander>a:hover,.expander>a>i:hover {
+  cursor: pointer;
+}
+
+.expanded {
+  top: 221px;
+
+  transition: top 0.3s ease-in-out 0s;
+  -webkit-transition: top 0.3s ease-in-out 0s;
+  -moz-transition: top 0.3s ease-in-out 0s;
+  -o-transition: top 0.3s ease-in-out 0s;
+ 
+}
+
+
+i.glyphicon {
+  font-size: 24px;
+}
+
+.search-form {
+  background: none repeat scroll 0 0 #FFFFFF;
+  top: -221px;
+  
+  transition: top 0.3s ease-in-out 0s;
+  -webkit-transition: top 0.3s ease-in-out 0s;
+  -moz-transition: top 0.3s ease-in-out 0s;
+  -o-transition: top 0.3s ease-in-out 0s;
+ 
+}
+.form-expanded {
+  top: 0px;
+
+  transition: top 0.3s ease-in-out 0s;
+  -webkit-transition: top 0.3s ease-in-out 0s;
+  -moz-transition: top 0.3s ease-in-out 0s;
+  -o-transition: top 0.3s ease-in-out 0s;
+}
