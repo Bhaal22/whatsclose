@@ -10,6 +10,18 @@ define([
     el:  '#container',
     
     initialize: function (options) {
+
+  //Navigation Menu Slider
+  $('#search-expander').on('click',function(e){
+    e.preventDefault();
+    $('#search-expander').toggleClass('expanded');
+    $('#expander-handle').toggleClass('glyphicon-chevron-down');
+    $('#expander-handle').toggleClass('glyphicon-chevron-up');
+
+    $('.search-form').toggleClass('form-expanded');
+  });
+
+
       _.bindAll(this, 'render', '_initialize_map', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('updateLocation', this._onLocationUpdated);
       options.vent.bind('concertsRetrieved', this._onConcertsRetrieved);
