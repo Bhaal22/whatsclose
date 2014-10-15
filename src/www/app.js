@@ -36,7 +36,7 @@ var router = express.Router();
  */
 app.get('/', function(req, res) {
 	var params = {};
-	params.title = "The JC page!";
+	params.title = "Whatsclose.io";
 	
 	searcher.getAllStyles()
 		.then(function(data) {
