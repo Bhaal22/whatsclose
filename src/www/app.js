@@ -105,6 +105,11 @@ router.route('/styles')
     };
   });
 
+router.route('/version')
+  .get(function(req, res) {
+    res.json({version: '0.2'});
+  });
+
 app.use('/api', router);
 
 /*
