@@ -90,7 +90,6 @@ router.route('/concerts')
 
 router.route('/styles')
   .get (function (req, res) {
-    console.log ('styles from REST API');
     var p = searcher.getAllStyles();
 
     p.then (function (data) {
@@ -104,8 +103,6 @@ router.route('/styles')
       fromDate: req.body.fromDate,
       toDate: req.body.toDate
     };
-
-    //TODO
   });
 
 app.use('/api', router);
@@ -113,10 +110,7 @@ app.use('/api', router);
 /*
  * Ajax call to search band name
  */
-app.get('/bandSearch', function(req, res) {
-	
-	console.log("params : %j", req.query);
-	
+app.get('/bandSearch', function(req, res) {	
 	searcher.search(req.query)
 		.then(function(data) {
 			res.send(data);
@@ -145,9 +139,12 @@ function getClientIp(req) {
 	return ipAddress;
 };
 
-module.exports.startServer = function(port) {
-	server.listen(port, function() {
-		console.log('listening on *: %s', port);
+module.exports.startServer = function(port, hostname) {
+  if (hostname === undefined)
+    hostname = '127.0.0.1';
+
+	server.listen(port, hostname, function() {
+		console.log('listening on *: %s %s', hostname, port);
 	});
 };
 
