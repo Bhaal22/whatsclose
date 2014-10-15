@@ -53,27 +53,27 @@ exports.filterByDate = function(from, to) {
 }
 
 exports.filterByGeolocation = function (position, radius) {
-  var filter = "";
-
-  if (radius === undefined) {
-    radius = "1000km"
-  }
-
   if (position) {
-
     var geo_position = position.split(',');
-    filter = {
+
+    var filter = {
       "geo_distance" : {
-        "distance" : radius,
         "geometry" : {
           "lat" : geo_position[0],
           "lon" : geo_position[1]
         }
       }
-    }
+    };
     
+    if ((radius === undefined) || (radius === '')) {
+      return null;
+    }
+    else {
+      filter.geo_distance.distance = radius;
+    }
     return filter;
   }
+  
   return null;
 }
 
