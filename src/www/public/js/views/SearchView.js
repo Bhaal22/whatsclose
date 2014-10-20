@@ -32,32 +32,36 @@ define([
       var self = this;
       var concerts = new Concerts ();
 
-      this._updateLocation(elt).done(function(_location) {
-        var location = _location.lat() + "," + _location.lng();
-        console.log('---------------');
-        console.log(location);
-        console.log('--------------');
-
-        concerts.fetch ({ 
-          data: { 
-            bandName: $(self.band).val(),
-            location: location,
-            radius: $(self.radius).val()
-          },
-          success: function (collection, response) {
-            console.dir(response);
-            console.dir(collection);
-            
-            self.vent.trigger('concertsRetrieved', response);
-          }
+      this._reset(elt).done(function() {
+     
+        self._updateLocation(elt).done(function(_location) {
+          var location = _location.lat() + "," + _location.lng();
+          console.log('---------------');
+          console.log(location);
+          console.log('--------------');
+          
+          concerts.fetch ({ 
+            data: { 
+              bandName: $(self.band).val(),
+              location: location,
+              radius: $(self.radius).val()
+            },
+            success: function (collection, response) {
+              console.dir(response);
+              console.dir(collection);
+              
+              self.vent.trigger('concertsRetrieved', response);
+            }
+          })
         })
       });
     },
 
     _reset: function(elt) {
+      var self = this;
       var deferred = $.Deferred();
       
-      self.vent.trigger('resetMap', results[0].geometry.location);
+      self.vent.trigger('resetMap');
       
       deferred.resolve();
       return deferred;

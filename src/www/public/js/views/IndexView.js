@@ -12,18 +12,18 @@ define([
     initialize: function (options) {
 
   //Navigation Menu Slider
-  $('#search-expander').on('click',function(e){
-    e.preventDefault();
-    $('#search-expander').toggleClass('expanded');
-    $('#expander-handle').toggleClass('glyphicon-chevron-down');
-    $('#expander-handle').toggleClass('glyphicon-chevron-up');
+      $('#search-expander').on('click',function(e){
+        e.preventDefault();
+        $('#search-expander').toggleClass('expanded');
+        $('#expander-handle').toggleClass('glyphicon-chevron-down');
+        $('#expander-handle').toggleClass('glyphicon-chevron-up');
+        
+        $('.search-form').toggleClass('form-expanded');
+      });
 
-    $('.search-form').toggleClass('form-expanded');
-  });
-
-
-      _.bindAll(this, 'render', '_initialize_map', '_onLocationUpdated', '_onConcertsRetrieved');
-//      options.vent.bind('resetMap', this._onResetMap);
+      
+      _.bindAll(this, 'render', '_initialize_map', '_onReset', '_onLocationUpdated', '_onConcertsRetrieved');
+      options.vent.bind('resetMap', this._onReset);
       options.vent.bind('updateLocation', this._onLocationUpdated);
       options.vent.bind('concertsRetrieved', this._onConcertsRetrieved);
     },
@@ -33,6 +33,8 @@ define([
       $(this.el).html(mainTemplate);
       
       that.map_container = {};
+      that.markers = [];
+
 
       that._initialize_map ();
 		},
@@ -50,7 +52,7 @@ define([
       ];
 
       var mapOptions = {
-          zoom: 9,
+          zoom: 6,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           center: center,
           styles: styles
@@ -66,10 +68,20 @@ define([
       });
 
       this.map_container.setCenter(location);
-          
+      
+      var marker = new google.maps.Marker({
+        position: location,
+        map: self.map_container
+      });
+
+      this.markers.push(marker);
     },
 
     _onReset: function() {
+      for (var i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(null);
+      }
+
     },
 
     _onConcertsRetrieved: function (concerts) {
@@ -84,6 +96,8 @@ define([
         });
 
         google.maps.event.addListener(marker, 'click', self.show_concert_detail);
+
+        self.markers.push(marker);
       });
     },
 
