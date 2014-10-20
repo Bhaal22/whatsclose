@@ -18,7 +18,7 @@ define([
       this.vent = options.vent;
       this.el = options.location;
 
-      _.bindAll(this, 'render', '_search');
+      _.bindAll(this, 'render', '_reset', '_search', '_updateLocation');
     },
 
     render: function () {
@@ -32,20 +32,58 @@ define([
       var self = this;
       var concerts = new Concerts ();
 
-      concerts.fetch ({ 
-        data: { 
-          bandName: $(this.band).val(),
-          location: $(this.location).val(),
-          radius: $(this.radius).val()
-        },
-        success: function (collection, response) {
-          console.log('coucou');
-          console.dir(response);
-          console.dir(collection);
+      this._updateLocation(elt).done(function(_location) {
+        var location = _location.lat() + "," + _location.lng();
+        console.log('---------------');
+        console.log(location);
+        console.log('--------------');
 
-          self.vent.trigger('concertsRetrieved', response);
-        }
+        concerts.fetch ({ 
+          data: { 
+            bandName: $(self.band).val(),
+            location: location,
+            radius: $(self.radius).val()
+          },
+          success: function (collection, response) {
+            console.dir(response);
+            console.dir(collection);
+            
+            self.vent.trigger('concertsRetrieved', response);
+          }
+        })
       });
+    },
+
+    _reset: function(elt) {
+      var deferred = $.Deferred();
+      
+      self.vent.trigger('resetMap', results[0].geometry.location);
+      
+      deferred.resolve();
+      return deferred;
+    },
+
+    _updateLocation : function(elt) {
+
+      var deferred = $.Deferred();
+
+
+      var self = this;
+      var address = $(this.location).val();
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'address': address}, function (results, status){
+        if (status === google.maps.GeocoderStatus.OK){
+          self.vent.trigger('updateLocation', results[0].geometry.location);
+
+
+          console.log(results[0].geometry.location);
+          deferred.resolve (results[0].geometry.location);
+        }
+        else
+          deferred.reject();
+      });
+
+      return deferred.promise();
     }
 
 	});

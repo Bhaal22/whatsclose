@@ -23,6 +23,7 @@ define([
 
 
       _.bindAll(this, 'render', '_initialize_map', '_onLocationUpdated', '_onConcertsRetrieved');
+//      options.vent.bind('resetMap', this._onResetMap);
       options.vent.bind('updateLocation', this._onLocationUpdated);
       options.vent.bind('concertsRetrieved', this._onConcertsRetrieved);
     },
@@ -67,7 +68,10 @@ define([
       this.map_container.setCenter(location);
           
     },
-    
+
+    _onReset: function() {
+    },
+
     _onConcertsRetrieved: function (concerts) {
       var self = this;
       concerts.forEach (function (concert) {
