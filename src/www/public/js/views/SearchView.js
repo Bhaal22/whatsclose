@@ -4,8 +4,9 @@ define([
   'underscore',
   'backbone',
   'collections/concerts',
+  'collections/bands', 
   'text!/templates/searchTemplate.html',
-], function($, _, Backbone, Concerts, searchTemplate){
+], function($, _, Backbone, Concerts, Bands, searchTemplate){
   
   var view = Backbone.View.extend({
     
@@ -26,6 +27,8 @@ define([
       $(this.el).html(searchTemplate);
 
       $('#search-button').click(this._search);
+
+      var bands = new Bands();
 		},
 
     _search: function (elt) {
@@ -36,9 +39,6 @@ define([
      
         self._updateLocation(elt).done(function(_location) {
           var location = _location.lat() + "," + _location.lng();
-          console.log('---------------');
-          console.log(location);
-          console.log('--------------');
           
           concerts.fetch ({ 
             data: { 

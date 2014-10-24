@@ -65,7 +65,14 @@ var searcher = require('./modules/searcher');
 
 router.route('/bands')
   .get (function (req, res) {
-    res.json ( { message : 'coucou'} );
+    var p = searcher.search(params);
+    p.then (function (data) {
+      var jsonout = data.map (function (concert) {
+        return concert._source;
+        });
+
+      res.json (jsonout);
+    });
   });
 
 router.route('/concerts')

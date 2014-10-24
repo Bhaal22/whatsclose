@@ -5,7 +5,6 @@
 var config = require('app-config');
 var Q = require('q');
 var ElasticSearchClient = require('elasticsearchclient');
-var Promise = require('es6-promise').Promise;
 var winston = require ('winston');
 
 var bandNameQuery = require('../queries/queries').bandNameQuery;
@@ -40,14 +39,6 @@ exports.search= function (params) {
   if (geolocFilter) {
     query.filter.bool.must.push(geolocFilter);
   }
-
-	// if (dateFilter) {
-	// 	query.filter = dateFilter;
-  // }
-  
-  // if (geolocFilter) {
-  //   query.filter = geolocFilter;
-  // }
 
 
 	elasticSearchClient.search(config.es.index, config.es.type, query)
