@@ -8,6 +8,7 @@
     "url": "https://github.com/Bhaal22/whatsclose"
   },
   "dependencies": {
-    "elasticsearch": "^2.4.3"
+    "elasticsearch": "^2.4.3",
+    "q": "^1.0.1"
   }
 }
