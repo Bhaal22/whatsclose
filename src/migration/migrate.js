@@ -32,12 +32,15 @@ var scroll = function (type) {
   return deferred.promise;
 }
 
-var populate_type = function (type) {
+var populate_type = function (scroll_id, type) {
   es_client.scroll({
     scrollId: scroll_id,
     scroll: '30s'
   }, function (error, data) {
-    
+    console.log(error);
+    console.log(data);
+    console.log(data.hits.total);
+
     data.hits.hits.forEach(function (hit) {
       
       es_client.create({
@@ -51,8 +54,15 @@ var populate_type = function (type) {
   });
 }
 
-scroll ('band').then(function (scroll_id) {
-  console.log(scroll_id);
+var doit = function(type) {
+  scroll (type).then(function (scroll_id) {
+    console.log(scroll_id);
+    
+    populate_type(scroll_id, type);
+  });
+}
 
-  populate_type('band');
-});
+
+doit ('band');
+doit ('concert');
+doit ('multiple.concert');
