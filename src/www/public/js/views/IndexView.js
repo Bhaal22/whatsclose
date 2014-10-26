@@ -10,8 +10,8 @@ define([
     el:  '#container',
     
     initialize: function (options) {
-
-  //Navigation Menu Slider
+      
+      //Navigation Menu Slider
       $('#search-expander').on('click',function(e){
         e.preventDefault();
         $('#search-expander').toggleClass('expanded');
@@ -34,7 +34,7 @@ define([
       
       that.map_container = {};
       that.markers = [];
-
+      that.showsCircle = null;
 
       that._initialize_map ();
 		},
@@ -61,16 +61,23 @@ define([
                                                mapOptions);
     },
 
-    _onLocationUpdated : function(location){
+    _onLocationUpdated : function(area){
       var marker = new google.maps.Marker({
         'map': this.map_container,
-        'position': location,
+        'position': area.location,
         'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
 
-      this.map_container.setCenter(location);
+      this.map_container.setCenter(area.location);
 
-      var showsCircle;
+      var regex = /\d+/;
+      var match = area.radius.match(regex);
+
+      var radius = 100;
+      if (match) {
+        radius = match[0];
+      }
+
       var options = {
         strokeColor: '#0000FF',
         strokeOpacity: 0.8,
@@ -78,13 +85,13 @@ define([
         fillColor: '#0000AA',
         fillOpacity: 0.05,
         map: this.map_container,
-        center: location,
-        radius: 500 * 1000
+        center: area.location,
+        radius: radius * 1000
       };
-      showsCircle = new google.maps.Circle(options);
+      this.showsCircle = new google.maps.Circle(options);
 
       var marker = new google.maps.Marker({
-        position: location,
+        position: area.location,
         map: self.map_container
       });
 
@@ -92,8 +99,13 @@ define([
     },
 
     _onReset: function() {
+      console.log('resetting ...');
       for (var i = 0; i < this.markers.length; i++) {
         this.markers[i].setMap(null);
+      }
+
+      if (this.showsCircle != null) {
+        this.showsCircle.setMap (null);
       }
 
     },

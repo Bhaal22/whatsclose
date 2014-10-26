@@ -74,10 +74,15 @@ define([
 
       var self = this;
       var address = $(this.location).val();
+      var radius = $(this.radius).val();
+
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({'address': address}, function (results, status){
         if (status === google.maps.GeocoderStatus.OK){
-          self.vent.trigger('updateLocation', results[0].geometry.location);
+          self.vent.trigger('updateLocation', {
+            location: results[0].geometry.location,
+            radius: radius
+          });
 
 
           console.log(results[0].geometry.location);
