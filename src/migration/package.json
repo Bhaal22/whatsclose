@@ -1,5 +1,5 @@
 {
-  "name": "whatsclose-indexer",
+  "name": "whatsclose-mapping-migrator",
   "version": "0.0.1",
   "private": true,
   "author": "Jonathan Muller <muller.john@gmail.com>",
