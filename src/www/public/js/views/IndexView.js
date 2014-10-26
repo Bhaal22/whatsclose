@@ -64,11 +64,25 @@ define([
     _onLocationUpdated : function(location){
       var marker = new google.maps.Marker({
         'map': this.map_container,
-        'position': location
+        'position': location,
+        'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
 
       this.map_container.setCenter(location);
-      
+
+      var showsCircle;
+      var options = {
+        strokeColor: '#0000FF',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000AA',
+        fillOpacity: 0.05,
+        map: this.map_container,
+        center: location,
+        radius: 500 * 1000
+      };
+      showsCircle = new google.maps.Circle(options);
+
       var marker = new google.maps.Marker({
         position: location,
         map: self.map_container
@@ -92,7 +106,8 @@ define([
         var marker = new google.maps.Marker({
           'map': self.map_container,
           'position': myLatlng,
-          'descr': myLatlng
+          'descr': myLatlng,
+          'icon': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
         google.maps.event.addListener(marker, 'click', self.show_concert_detail);
