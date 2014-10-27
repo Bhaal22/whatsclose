@@ -55,12 +55,24 @@ app.get('/', function(req, res) {
 
 var searcher = require('./modules/searcher');
 
+router.route('/concerts_by_bands')
+  .get (function (req, res) {
+    var p = searcher.concerts_by_bands();
+    p.then (function (data) {
+      var jsonout = data.map (function (pair) {
+        return {band: pair.key, count: pair.doc_count};
+        });
+
+      res.json (jsonout);
+    });
+  });
+
 router.route('/bands')
   .get (function (req, res) {
-    var p = searcher.search(params);
+    var p = searcher.bands();
     p.then (function (data) {
-      var jsonout = data.map (function (concert) {
-        return concert._source;
+      var jsonout = data.map (function (band) {
+        return band._source;
         });
 
       res.json (jsonout);
