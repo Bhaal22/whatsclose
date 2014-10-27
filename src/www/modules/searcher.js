@@ -112,17 +112,7 @@ exports.concerts_by_bands = function () {
         console.dir(json);
 				deferred.resolve(json.aggregations.by_band.buckets);
 			}
-		}).then(map) {
-      
-      return deferred.resolve( {bands: bands (), map: map });
-    }.then (data) {
-
-      var json = data.bands.map(function (band) {
-        
-      }
-
-
-    }
+		})
 		.on('error', function(error) {
 			console.log(error);
 			deferred.reject(error);
@@ -159,7 +149,5 @@ exports.bands = function () {
 			deferred.reject(error);
 		})
 		.exec();
-	
 	return deferred.promise;
-  
 }
