@@ -26,6 +26,9 @@ exports.allSylesQuery = {
 	}
 };
 
+//GET /whatsclose.dev/_search?search_type=scan&scroll=1m
+
+
 
 exports.filterByDate = function(from, to) {
 

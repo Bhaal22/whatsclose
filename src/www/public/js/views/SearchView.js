@@ -5,8 +5,10 @@ define([
   'underscore',
   'backbone',
   'collections/concerts',
+  'collections/bands', 
   'text!/templates/searchTemplate.html',
-], function($, dp, _, Backbone, Concerts, searchTemplate){
+], function($, dp, _, Backbone, Concerts, Bands, searchTemplate){
+
   
   var view = Backbone.View.extend({
     
@@ -43,6 +45,8 @@ define([
       });
 
       $('#search-button').click(this._search);
+
+      var bands = new Bands();
 		},
 
     _search: function (elt) {
@@ -53,9 +57,6 @@ define([
      
         self._updateLocation(elt).done(function(_location) {
           var location = _location.lat() + "," + _location.lng();
-          console.log('---------------');
-          console.log(location);
-          console.log('--------------');
           
           concerts.fetch ({ 
             data: { 
@@ -91,10 +92,15 @@ define([
 
       var self = this;
       var address = $(this.location).val();
+      var radius = $(this.radius).val();
+
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({'address': address}, function (results, status){
         if (status === google.maps.GeocoderStatus.OK){
-          self.vent.trigger('updateLocation', results[0].geometry.location);
+          self.vent.trigger('updateLocation', {
+            location: results[0].geometry.location,
+            radius: radius
+          });
 
 
           console.log(results[0].geometry.location);
