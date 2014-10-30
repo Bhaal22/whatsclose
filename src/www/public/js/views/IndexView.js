@@ -21,7 +21,15 @@ define([
         $('.search-form').toggleClass('form-expanded');
       });
 
+
       
+      /*$("#to-input").datepicker({
+        format: "yyyy-mm-dd",
+        weekStart: 1,
+        todayBtn: "linked",
+        todayHighlight: true
+      });*/
+
       _.bindAll(this, 'render', '_initialize_map', '_onReset', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('resetMap', this._onReset);
       options.vent.bind('updateLocation', this._onLocationUpdated);

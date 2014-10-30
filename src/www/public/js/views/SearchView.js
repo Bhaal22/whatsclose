@@ -1,11 +1,12 @@
 
 define([
   'jquery',
+  'datepicker',
   'underscore',
   'backbone',
   'collections/concerts',
   'text!/templates/searchTemplate.html',
-], function($, _, Backbone, Concerts, searchTemplate){
+], function($, dp, _, Backbone, Concerts, searchTemplate){
   
   var view = Backbone.View.extend({
     
@@ -24,6 +25,22 @@ define([
     render: function () {
 			var that = this;
       $(this.el).html(searchTemplate);
+
+
+      $("#from-input").datepicker({
+        format: "yyyy-mm-dd",
+        weekStart: 1,
+        todayBtn: "linked",
+        todayHighlight: true,
+        autoclose: true
+      });
+      $("#to-input").datepicker({
+        format: "yyyy-mm-dd",
+        weekStart: 1,
+        todayBtn: "linked",
+        todayHighlight: true,
+        autoclose: true
+      });
 
       $('#search-button').click(this._search);
 		},
