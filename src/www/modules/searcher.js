@@ -83,3 +83,71 @@ exports.getAllStyles = function() {
 	
 	return deferred.promise;
 };
+
+exports.concerts_by_bands = function () {
+  var deferred = Q.defer();
+	winston.info("concerts_by_bands");
+	
+  var query = {
+    "query": {
+      "match_all": {}
+    },
+    "aggs": {
+      "by_band": {
+        "terms": {
+          "field": "bandName.exact",
+          "size": 1000
+        }
+      }
+    }
+  };
+    
+	elasticSearchClient.search(config.es.index, config.es.type, query)
+		.on('data', function(data) {
+			var json = JSON.parse(data);
+
+			if (json.status === 404) {
+				deferred.resolve ([]);
+			} else {
+        console.dir(json);
+				deferred.resolve(json.aggregations.by_band.buckets);
+			}
+		})
+		.on('error', function(error) {
+			console.log(error);
+			deferred.reject(error);
+		})
+		.exec();
+	
+	return deferred.promise;
+  
+}
+
+exports.bands = function () {
+  var deferred = Q.defer();
+	winston.info("concerts_by_bands");
+	
+  var query = {
+    "query": {
+      "match_all": {}
+    }
+  };
+    
+	elasticSearchClient.search(config.es.index, 'band', query)
+		.on('data', function(data) {
+			var json = JSON.parse(data);
+
+			if (json.status === 404) {
+				deferred.resolve ([]);
+			} else {
+        console.dir(json);
+				deferred.resolve(json.hits.hits);
+			}
+		})
+		.on('error', function(error) {
+			console.log(error);
+			deferred.reject(error);
+		})
+		.exec();
+	return deferred.promise;
+}

@@ -10,8 +10,8 @@ define([
     el:  '#container',
     
     initialize: function (options) {
-
-  //Navigation Menu Slider
+      
+      //Navigation Menu Slider
       $('#search-expander').on('click',function(e){
         e.preventDefault();
         $('#search-expander').toggleClass('expanded');
@@ -21,7 +21,15 @@ define([
         $('.search-form').toggleClass('form-expanded');
       });
 
+
       
+      /*$("#to-input").datepicker({
+        format: "yyyy-mm-dd",
+        weekStart: 1,
+        todayBtn: "linked",
+        todayHighlight: true
+      });*/
+
       _.bindAll(this, 'render', '_initialize_map', '_onReset', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('resetMap', this._onReset);
       options.vent.bind('updateLocation', this._onLocationUpdated);
@@ -34,7 +42,7 @@ define([
       
       that.map_container = {};
       that.markers = [];
-
+      that.showsCircle = null;
 
       that._initialize_map ();
 		},
@@ -61,16 +69,37 @@ define([
                                                mapOptions);
     },
 
-    _onLocationUpdated : function(location){
+    _onLocationUpdated : function(area){
       var marker = new google.maps.Marker({
         'map': this.map_container,
-        'position': location
+        'position': area.location,
+        'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
 
-      this.map_container.setCenter(location);
-      
+      this.map_container.setCenter(area.location);
+
+      var regex = /\d+/;
+      var match = area.radius.match(regex);
+
+      var radius = 100;
+      if (match) {
+        radius = match[0];
+      }
+
+      var options = {
+        strokeColor: '#0000FF',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000AA',
+        fillOpacity: 0.05,
+        map: this.map_container,
+        center: area.location,
+        radius: radius * 1000
+      };
+      this.showsCircle = new google.maps.Circle(options);
+
       var marker = new google.maps.Marker({
-        position: location,
+        position: area.location,
         map: self.map_container
       });
 
@@ -78,8 +107,13 @@ define([
     },
 
     _onReset: function() {
+      console.log('resetting ...');
       for (var i = 0; i < this.markers.length; i++) {
         this.markers[i].setMap(null);
+      }
+
+      if (this.showsCircle != null) {
+        this.showsCircle.setMap (null);
       }
 
     },
@@ -92,7 +126,8 @@ define([
         var marker = new google.maps.Marker({
           'map': self.map_container,
           'position': myLatlng,
-          'descr': myLatlng
+          'descr': myLatlng,
+          'icon': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
         google.maps.event.addListener(marker, 'click', self.show_concert_detail);

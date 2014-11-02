@@ -1,12 +1,14 @@
 
 define([
   'jquery',
+  'datepicker',
   'underscore',
   'backbone',
   'collections/concerts',
   'collections/bands', 
   'text!/templates/searchTemplate.html',
-], function($, _, Backbone, Concerts, Bands, searchTemplate){
+], function($, dp, _, Backbone, Concerts, Bands, searchTemplate){
+
   
   var view = Backbone.View.extend({
     
@@ -25,6 +27,22 @@ define([
     render: function () {
 			var that = this;
       $(this.el).html(searchTemplate);
+
+
+      $("#from-input").datepicker({
+        format: "yyyy-mm-dd",
+        weekStart: 1,
+        todayBtn: "linked",
+        todayHighlight: true,
+        autoclose: true
+      });
+      $("#to-input").datepicker({
+        format: "yyyy-mm-dd",
+        weekStart: 1,
+        todayBtn: "linked",
+        todayHighlight: true,
+        autoclose: true
+      });
 
       $('#search-button').click(this._search);
 
@@ -74,10 +92,15 @@ define([
 
       var self = this;
       var address = $(this.location).val();
+      var radius = $(this.radius).val();
+
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({'address': address}, function (results, status){
         if (status === google.maps.GeocoderStatus.OK){
-          self.vent.trigger('updateLocation', results[0].geometry.location);
+          self.vent.trigger('updateLocation', {
+            location: results[0].geometry.location,
+            radius: radius
+          });
 
 
           console.log(results[0].geometry.location);
