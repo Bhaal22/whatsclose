@@ -22,15 +22,6 @@ define([
         $('.search-form').toggleClass('form-expanded');
       });
 
-
-      
-      /*$("#to-input").datepicker({
-        format: "yyyy-mm-dd",
-        weekStart: 1,
-        todayBtn: "linked",
-        todayHighlight: true
-      });*/
-
       _.bindAll(this, 'render', '_initialize_map', '_onReset', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('resetMap', this._onReset);
       options.vent.bind('updateLocation', this._onLocationUpdated);
@@ -42,6 +33,7 @@ define([
       $(this.el).html(mainTemplate);
       
       that.map_container = {};
+      that.location_marker = null;
       that.markers = [];
       that.showsCircle = null;
 
@@ -71,11 +63,11 @@ define([
     },
 
     _onLocationUpdated : function(area){
-      // var marker = new google.maps.Marker({
-      //   'map': this.map_container,
-      //   'position': area.location,
-      //   'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-      // });
+      var marker = new google.maps.Marker({
+        'map': this.map_container,
+        'position': area.location,
+        'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      });
 
       this.map_container.setCenter(area.location);
 
@@ -99,16 +91,20 @@ define([
       };
       this.showsCircle = new google.maps.Circle(options);
 
-      // var marker = new google.maps.Marker({
-      //   position: area.location,
-      //   map: self.map_container
-      // });
+      var marker = new google.maps.Marker({
+        position: area.location,
+        map: self.map_container
+      });
 
-      // this.markers.push(marker);
+      this.location_marker = marker;
     },
 
     _onReset: function() {
       console.log('resetting ...');
+      
+      if (this.location_marker != null)
+        this.location_marker.setMap(null);
+
       for (var i = 0; i < this.markers.length; i++) {
         this.markers[i].remove();
       }
@@ -129,23 +125,8 @@ define([
         });
 
         self.markers.push(marker);
-        // var myLatlng = new google.maps.LatLng(concert.geometry.lat, concert.geometry.lon);
-        // var marker = new google.maps.Marker({
-        //   'map': self.map_container,
-        //   'position': myLatlng,
-        //   'descr': myLatlng,
-        //   'icon': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-        // });
-
-        // google.maps.event.addListener(marker, 'click', self.show_concert_detail);
-
-        // self.markers.push(marker);
       });
     },
-
-    show_concert_detail: function () {
-      alert('toto');
-    }
 
 	});
   return MainView;
