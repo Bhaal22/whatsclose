@@ -4,7 +4,8 @@ define([
   'underscore',
   'backbone',
   'text!/templates/mainTemplate.html',
-], function($, _, Backbone, mainTemplate){
+  'views/concert_marker_view'
+], function($, _, Backbone, mainTemplate, ConcertMarkerView){
   
   var MainView = Backbone.View.extend({
     el:  '#container',
@@ -70,11 +71,11 @@ define([
     },
 
     _onLocationUpdated : function(area){
-      var marker = new google.maps.Marker({
-        'map': this.map_container,
-        'position': area.location,
-        'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-      });
+      // var marker = new google.maps.Marker({
+      //   'map': this.map_container,
+      //   'position': area.location,
+      //   'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      // });
 
       this.map_container.setCenter(area.location);
 
@@ -98,18 +99,18 @@ define([
       };
       this.showsCircle = new google.maps.Circle(options);
 
-      var marker = new google.maps.Marker({
-        position: area.location,
-        map: self.map_container
-      });
+      // var marker = new google.maps.Marker({
+      //   position: area.location,
+      //   map: self.map_container
+      // });
 
-      this.markers.push(marker);
+      // this.markers.push(marker);
     },
 
     _onReset: function() {
       console.log('resetting ...');
       for (var i = 0; i < this.markers.length; i++) {
-        this.markers[i].setMap(null);
+        this.markers[i].remove();
       }
 
       if (this.showsCircle != null) {
@@ -122,17 +123,23 @@ define([
       var self = this;
       concerts.forEach (function (concert) {
 
-        var myLatlng = new google.maps.LatLng(concert.geometry.lat, concert.geometry.lon);
-        var marker = new google.maps.Marker({
-          'map': self.map_container,
-          'position': myLatlng,
-          'descr': myLatlng,
-          'icon': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        var marker = new ConcertMarkerView({
+          model: concert,
+          map: self.map_container 
         });
 
-        google.maps.event.addListener(marker, 'click', self.show_concert_detail);
-
         self.markers.push(marker);
+        // var myLatlng = new google.maps.LatLng(concert.geometry.lat, concert.geometry.lon);
+        // var marker = new google.maps.Marker({
+        //   'map': self.map_container,
+        //   'position': myLatlng,
+        //   'descr': myLatlng,
+        //   'icon': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        // });
+
+        // google.maps.event.addListener(marker, 'click', self.show_concert_detail);
+
+        // self.markers.push(marker);
       });
     },
 

@@ -7,7 +7,7 @@ define([
   'backbone',
   'views/IndexView',
   'views/LocationView',
-  'views/SearchView',
+  'views/SearchView'
 ], function ($, _, Backbone, IndexView, LocationView, SearchView) {
   
   var MainRouter = Backbone.Router.extend({
@@ -25,9 +25,6 @@ define([
 
       var indexView = new IndexView({'vent':vent});
       indexView.render();
-
-      //var locationView = new LocationView({'vent': vent, 'location': '#menu'});
-      //locationView.render();
 
       var searchView = new SearchView ({ 'vent': vent, 'location': '#menu' });
       searchView.render ();
