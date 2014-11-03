@@ -66,7 +66,7 @@ router.route('/bands')
 
           var b = band._source; 
           var o = concerts_by_band.filter(function(pair) {
-            return pair.key === b.name;
+            return pair.key == b.name;
           });
 
           if (o[0] != null) {
@@ -77,6 +77,7 @@ router.route('/bands')
           return b;
 
         });
+
         res.json (json);
       });
     });

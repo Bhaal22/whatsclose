@@ -166,3 +166,8 @@ body {
 /*     height:19px; */
 /*     width:13px; */
 /* } */
+
+
+datalist {
+    display: none;
+} 

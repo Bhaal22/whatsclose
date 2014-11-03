@@ -6,7 +6,10 @@ define([
 
   var Band = Backbone.Model.extend({
     defaults: {
-      bandName: ''
+      name: '',
+      website: '',
+      count: ''
+      
     }
   });
   

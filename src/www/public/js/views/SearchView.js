@@ -5,9 +5,9 @@ define([
   'underscore',
   'backbone',
   'collections/concerts',
-  'collections/bands', 
+  'views/band_selector',
   'text!/templates/searchTemplate.html',
-], function($, dp, _, Backbone, Concerts, Bands, searchTemplate){
+], function($, dp, _, Backbone, Concerts, BandSelectorView, searchTemplate){
 
   
   var view = Backbone.View.extend({
@@ -46,7 +46,7 @@ define([
 
       $('#search-button').click(this._search);
 
-      var bands = new Bands();
+      this.band_selector = new BandSelectorView({});
 		},
 
     _search: function (elt) {

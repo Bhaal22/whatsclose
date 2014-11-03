@@ -9,14 +9,16 @@ define([
   'backbone',
   'models/band'
 ], function($, _, Backbone, Band){
-  var Concerts = Backbone.Collection.extend({
+  var Bands = Backbone.Collection.extend({
     model: Band,
     url:"/api/bands",
    
 
     parse: function(response) {
+      //console.log(response[0]);
+      return response;
     }
   });
   
-  return Concerts;
+  return Bands;
 });
