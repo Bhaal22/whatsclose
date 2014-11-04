@@ -116,12 +116,15 @@ define([
 
     },
 
-    _onConcertsRetrieved: function (concerts) {
+    _onConcertsRetrieved: function (data) {
       var self = this;
+      
+      var concerts = data.concerts;
       concerts.forEach (function (concert) {
 
         var marker = new ConcertMarkerView({
           model: concert,
+          query: data.query,
           map: self.map_container 
         });
 

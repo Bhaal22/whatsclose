@@ -80,7 +80,12 @@ define([
               console.dir(response);
               console.dir(collection);
               
-              self.vent.trigger('concertsRetrieved', response);
+              self.vent.trigger('concertsRetrieved', {
+                query: {
+                  from: $(self.from).val()
+                },
+                concerts: response
+              });
             }
           })
         })

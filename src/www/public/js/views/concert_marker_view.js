@@ -16,7 +16,6 @@ define([
       var self = this;
 
       self.model = options.model;
-      //self.model.on('remove', self.remove, self);
 
       var concert = self.model;
       self.map = options.map;
@@ -25,13 +24,32 @@ define([
       self.marker = new google.maps.Marker({
         map: self.map,
         position: myLatlng,
-        //          animation: google.maps.Animation.DROP,
-        icon : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+        /*icon : 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',*/
         descr : myLatlng
       });
 
+      //to refactor
+      var from = options.query.from;
+      var dt = (new Date(self.model.date) - new Date()) /(1000*60*60*24);
+      console.log("%s %s %s", self.model.date, from, dt)
+
+      var content = "<h1>@" + self.model.venue + "</h1>";
+      content += "<div class='date'>" + self.model.date + "</div>";
+      if (dt < 0) {
+        self.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+      }
+      else if ((dt >= 0) && (dt <= 7)) {
+        self.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+      }
+      else if ((dt > 7) && (dt <= 14)) {
+        self.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/orange-dot.png');
+      }
+      else {
+        self.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+      }
+
       self.marker.infowindow = new google.maps.InfoWindow({
-        content: self.model.date
+        content: content
       });
 
       google.maps.event.addListener(self.marker, 'mouseover', self.show_concert_info);
@@ -48,12 +66,10 @@ define([
     },
 
     hide_concert_info : function(){
-      this.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
       this.infowindow.close();
     },
 
     show_concert_info : function(){
-      this.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
       this.infowindow.open(this.map, this);
     },
 
