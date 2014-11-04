@@ -108,6 +108,7 @@ define([
       for (var i = 0; i < this.markers.length; i++) {
         this.markers[i].remove();
       }
+      this.markers = [];
 
       if (this.showsCircle != null) {
         this.showsCircle.setMap (null);

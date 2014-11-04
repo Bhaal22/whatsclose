@@ -88,6 +88,8 @@ define([
     },
 
     _reset: function(elt) {
+
+      console.log('resetting ....');
       var self = this;
       var deferred = $.Deferred();
       
