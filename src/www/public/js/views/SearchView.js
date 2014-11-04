@@ -15,6 +15,8 @@ define([
     location: '#location-input',
     band: '#band-input',
     radius: '#radius-input',
+    from: '#from-input',
+    to: '#to-input',
     vent: '',
 
     initialize: function (options) {
@@ -32,10 +34,15 @@ define([
       $("#from-input").datepicker({
         format: "yyyy-mm-dd",
         weekStart: 1,
+        setDate: new Date(),
         todayBtn: "linked",
         todayHighlight: true,
         autoclose: true
       });
+
+      var today = new Date();
+      $('#from-input').datepicker('update', today);
+
       $("#to-input").datepicker({
         format: "yyyy-mm-dd",
         weekStart: 1,
@@ -43,6 +50,9 @@ define([
         todayHighlight: true,
         autoclose: true
       });
+
+      today.setDate(today.getDate() + 21);
+      $('#to-input').datepicker('update', today);
 
       $('#search-button').click(this._search);
 
@@ -62,6 +72,8 @@ define([
             data: { 
               bandName: $(self.band).val(),
               location: location,
+              from: $(self.from).val(),
+              to: $(self.to).val(),
               radius: $(self.radius).val()
             },
             success: function (collection, response) {
