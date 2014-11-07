@@ -48,7 +48,7 @@ app.get('/', function(req, res) {
 		}, function(error) {
 			console.log("error: %s", error);
 			
-			res.render('index2', params);
+			res.render('index', params);
 		});
 
 });
