@@ -13,14 +13,6 @@ define([
     initialize: function (options) {
       
       //Navigation Menu Slider
-      $('#search-expander').on('click',function(e){
-        e.preventDefault();
-        $('#search-expander').toggleClass('expanded');
-        $('#expander-handle').toggleClass('glyphicon-chevron-down');
-        $('#expander-handle').toggleClass('glyphicon-chevron-up');
-        
-        $('.search-form').toggleClass('form-expanded');
-      });
 
       _.bindAll(this, 'render', '_initialize_map', '_onReset', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('resetMap', this._onReset);
@@ -44,19 +36,19 @@ define([
       var center = new google.maps.LatLng(43.580417999999995,7.125102);
       var styles = [
         {
-          elementType: "geometry",
+          elementType: "geometry"/*,
           stylers: [
             { lightness: 33 },
             { saturation: -90 }
-          ]
+          ]*/
         }
       ];
 
       var mapOptions = {
           zoom: 6,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
-          center: center//,
-          /*styles: styles*/
+          center: center,
+          styles: styles
       };
       this.map_container = new google.maps.Map(document.getElementById('map-container'),
                                                mapOptions);

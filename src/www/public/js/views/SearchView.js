@@ -29,7 +29,15 @@ define([
     render: function () {
 			var that = this;
       $(this.el).html(searchTemplate);
-
+      
+      $('#search-expander').on('click',function(e){
+        e.preventDefault();
+        $('#search-expander').toggleClass('expanded');
+        $('#expander-handle').toggleClass('glyphicon-chevron-down');
+        $('#expander-handle').toggleClass('glyphicon-chevron-up');
+        
+        $('.search-form').toggleClass('form-expanded');
+      });
 
       $("#from-input").datepicker({
         format: "yyyy-mm-dd",

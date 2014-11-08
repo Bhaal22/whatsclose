@@ -1,33 +1,48 @@
-<div class="col-md-2">&nbsp;</div>
-<div class="search-form col-md-8 well">
-	<div class="row form-group">
-        <div class="col-md-6">
-            <input id="band-input" list="bands" type="text" class="form-control" placeholder="Band"/>
-            <datalist id="bands">
-            </datalist>
-        </div>
-        <div class="col-md-6">
-            <input id="style-input" type="text" class="form-control" placeholder="Styles" readonly/>
-        </div>
+
+
+<div class="row">
+  <div class="col-xs-6 col-md-4"></div>
+  <div class="col-xs-6 col-md-4">
+    <div id="search-expander" class="expander">
+      <a class="center-block text-center">
+        <i id="expander-handle" class="glyphicon glyphicon-chevron-down"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-4"></div>
+  <div class="search-form col-xs-6 col-md-4 well">
+    
+	  <div class="row form-group">
+      <div class="col-md-6">
+        <input id="band-input" list="bands" type="text" class="form-control" placeholder="Band"/>
+        <datalist id="bands">
+        </datalist>
+      </div>
+      <div class="col-md-6">
+        <input id="style-input" type="text" class="form-control" placeholder="Styles" readonly/>
+      </div>
     </div>
     <div class="row form-group">
-        <div class="col-md-6">
-            <input id="location-input" type="text" class="form-control" placeHolder="Location" />
+      <div class="col-md-6">
+        <input id="location-input" type="text" class="form-control" placeHolder="Location" />
+      </div>
+      <div class="col-md-6">
+        <input id="radius-input" type="text" class="form-control" placeHolder="radius" />
+      </div>
+	  </div>
+	  <div class="row form-group">
+      <div class="col-md-12">
+        <div class="input-group">
+          <input id="from-input" type="text" class="form-control input-sm" name="start" placeHolder="yyyy-mm-dd"/>
+          <span class="input-group-addon">to</span>
+          <input id="to-input" type="text" class="form-control input-sm" name="end" placeHolder="yyyy-mm-dd"/>
         </div>
-        <div class="col-md-6">
-            <input id="radius-input" type="text" class="form-control" placeHolder="radius" />
-        </div>
-	</div>
-	<div class="row form-group">
-        <div class="col-md-12">
-            <div class="input-group">
-                <input id="from-input" type="text" class="form-control input-sm" name="start" placeHolder="yyyy-mm-dd"/>
-                <span class="input-group-addon">to</span>
-                <input id="to-input" type="text" class="form-control input-sm" name="end" placeHolder="yyyy-mm-dd"/>
-            </div>
-        </div>
-	</div>
-
+      </div>
+	  </div>
+    
     <button id="search-button" class="btn btn-default">Search</button>
+  </div>
 </div>
-<div class="col-md-2">&nbsp;</div>
