@@ -43,7 +43,7 @@ app.get('/', function(req, res) {
 			
       params.styles = data;
 
-			res.render('index2', params);
+			res.render('index', params);
 			
 		}, function(error) {
 			console.log("error: %s", error);

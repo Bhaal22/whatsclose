@@ -1,14 +1,12 @@
-//var styles = new ConcertStyles();
-
-
 define([
   'jquery',
   'underscore',
   'backbone',
   'views/IndexView',
   'views/LocationView',
-  'views/SearchView'
-], function ($, _, Backbone, IndexView, LocationView, SearchView) {
+  'views/SearchView',
+  'views/AboutView'
+], function ($, _, Backbone, IndexView, LocationView, SearchView, AboutView) {
   
   var MainRouter = Backbone.Router.extend({
     routes: {
@@ -29,11 +27,11 @@ define([
       var searchView = new SearchView ({ 'vent': vent, 'location': '#menu' });
       searchView.render ();
 
-      console.log("default route");
+      var aboutView = new AboutView({});
+      aboutView.render();
     },
 
     showAbout: function () {
-      console.log("display about");
     }
   });
 

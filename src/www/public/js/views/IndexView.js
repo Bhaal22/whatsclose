@@ -55,8 +55,8 @@ define([
       var mapOptions = {
           zoom: 6,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
-          center: center,
-          styles: styles
+          center: center//,
+          /*styles: styles*/
       };
       this.map_container = new google.maps.Map(document.getElementById('map-container'),
                                                mapOptions);
