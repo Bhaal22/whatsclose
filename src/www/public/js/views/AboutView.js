@@ -12,8 +12,6 @@ define([
     vent: '',
 
     initialize: function (options) {
-      //this.vent = options.vent;
-
       _.bindAll(this, 'render');
     },
 
