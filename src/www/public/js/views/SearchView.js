@@ -5,9 +5,9 @@ define([
   'underscore',
   'backbone',
   'collections/concerts',
-  'collections/bands', 
+  'views/band_selector',
   'text!/templates/searchTemplate.html',
-], function($, dp, _, Backbone, Concerts, Bands, searchTemplate){
+], function($, dp, _, Backbone, Concerts, BandSelectorView, searchTemplate){
 
   
   var view = Backbone.View.extend({
@@ -15,6 +15,8 @@ define([
     location: '#location-input',
     band: '#band-input',
     radius: '#radius-input',
+    from: '#from-input',
+    to: '#to-input',
     vent: '',
 
     initialize: function (options) {
@@ -27,15 +29,28 @@ define([
     render: function () {
 			var that = this;
       $(this.el).html(searchTemplate);
-
+      
+      $('#search-expander').on('click',function(e){
+        e.preventDefault();
+        $('#search-expander').toggleClass('expanded');
+        $('#expander-handle').toggleClass('glyphicon-chevron-down');
+        $('#expander-handle').toggleClass('glyphicon-chevron-up');
+        
+        $('.search-form').toggleClass('form-expanded');
+      });
 
       $("#from-input").datepicker({
         format: "yyyy-mm-dd",
         weekStart: 1,
+        setDate: new Date(),
         todayBtn: "linked",
         todayHighlight: true,
         autoclose: true
       });
+
+      var today = new Date();
+      $('#from-input').datepicker('update', today);
+
       $("#to-input").datepicker({
         format: "yyyy-mm-dd",
         weekStart: 1,
@@ -44,9 +59,12 @@ define([
         autoclose: true
       });
 
+      today.setDate(today.getDate() + 21);
+      $('#to-input').datepicker('update', today);
+
       $('#search-button').click(this._search);
 
-      var bands = new Bands();
+      this.band_selector = new BandSelectorView({});
 		},
 
     _search: function (elt) {
@@ -62,13 +80,20 @@ define([
             data: { 
               bandName: $(self.band).val(),
               location: location,
+              from: $(self.from).val(),
+              to: $(self.to).val(),
               radius: $(self.radius).val()
             },
             success: function (collection, response) {
               console.dir(response);
               console.dir(collection);
               
-              self.vent.trigger('concertsRetrieved', response);
+              self.vent.trigger('concertsRetrieved', {
+                query: {
+                  from: $(self.from).val()
+                },
+                concerts: response
+              });
             }
           })
         })
@@ -76,6 +101,8 @@ define([
     },
 
     _reset: function(elt) {
+
+      console.log('resetting ....');
       var self = this;
       var deferred = $.Deferred();
       

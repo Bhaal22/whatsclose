@@ -2,83 +2,25 @@
 <html>
   <head>
     <title><%= title %></title>
-    <!--
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    -->
-    
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-    <script src="js/indexView.js"></script>
-    <script src="js/utils.js"></script>
-    
-    <!-- Google Maps -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=set_to_true_or_false"></script>
-    
-    
-    
-    
-    <style type="text/css">
-    	div.ui-datepicker{
-			font-size:10px;
-		}
-    </style>
-    
-    
-    
+
+	  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/expander.css">
+    <!-- <link rel="stylesheet" href="css/datepicker3.css"> -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <div id="search" style="width:400px;">
-    
 
-		  <%- label_for("bandName", "Band Name") %> 
-		  <%- text_field_tag("bandName", {"size": 15, "maxlength": 15}) %>
-		  
-		  <%- js_button("Search", "searchBandName()") %>
-      
-    </div>
-    
-    <div id="filters" style="width:400px;">
-		<div id="title" style="height: 20px">
-			<h4>Filters</h4>
-		</div>
-		<div>
-	        <% 
-	           var styleOptions = [{"value": "", "text" : ""}];
-	    		   if (locals.styles) {
-	    			   for (var i = 0; i < styles.length; i++) {
-	    			     styleOptions.push({"value" : styles[i].key, "text" : styles[i].key + " (" + styles[i].doc_count + " doc)"});
-	             }
-	           }
-	        %>
-        
-        	Style <%- select_tag("stylesSelect", styleOptions) -%>
-		</div>
-		<div id="from" style="float: left">
-			<%- label_for("fromDate", "From") %> 
-		  	<%- text_field_tag("fromDate", {"size": 15, "maxlength": 15}) %>
-		</div>
-		<div id="to">
-			<%- label_for("toDate", "To") %> 
-		  	<%- text_field_tag("toDate", {"size": 15, "maxlength": 15}) %>
-		</div>
-	</div>
-    
-    <div id="map" style="width:700px; height:600px; float: right;"></div>
-    
-    <div id="resultList" style="width: 100%; display: none">
-    	<div id="title">
-    		<h2>Results</h2>
-    	</div>
-    </div>
-    
-    
-    
-    <script>
-    	
-    </script>
-    
+    <header id="head"></header>
+    <section id="menu"></section>
+
+    <section id="container"></section>
+    <footer></footer>
+
+    <script data-main="js/main" src="js/libs/require/require.js"></script>
   </body>
 </html>

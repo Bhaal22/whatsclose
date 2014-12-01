@@ -1,0 +1,65 @@
+#head {
+    background-image: url("../img/bg_header.png");
+    background-repeat: repeat-x;
+    height: 50px;
+    margin: 0 auto auto;
+    overflow: hidden;
+    width: 100%;
+}
+
+#head      span.blog-slogan {
+        color: #777777;
+}
+
+#navbar {
+    float: right;
+    font-size: 0.95em;
+    margin-top: 0.5em;
+    margin-right: 5em;
+    overflow: hidden;
+    text-align: center;
+}
+
+#navbar a, #navbar a:link, #navbar a:visited {
+    color: #e7e7e7;
+    float: left;
+    margin-left: 0.313em;
+    opacity: 0.7;
+    padding: 0.5em;
+    text-decoration: none;
+    transition: all 200ms ease 0s;
+        -webkit-transition: all 200ms ease 0s;
+}
+
+#navbar a:hover {
+    opacity: 1;
+}
+
+#navbar #social {
+    margin-top: 0px;
+    float: right;
+}
+
+#navbar #social img {
+    height: 32px;
+    width: 32px;
+}
+
+#name {
+    float: left;
+    margin-left: 5em;
+    margin-top: 0.5em;
+}
+
+#name  a {
+    color: #e7e7e7;
+    font-size: 1.5em;
+    opacity: 0.7;
+    text-decoration: none;
+    transition: all 200ms ease 0s;
+        -webkit-transition: all 200ms ease 0s;
+}
+
+#name  a:hover {
+    opacity: 1;
+}

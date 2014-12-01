@@ -4,7 +4,8 @@ define([
   'underscore',
   'backbone',
   'text!/templates/mainTemplate.html',
-], function($, _, Backbone, mainTemplate){
+  'views/concert_marker_view'
+], function($, _, Backbone, mainTemplate, ConcertMarkerView){
   
   var MainView = Backbone.View.extend({
     el:  '#container',
@@ -12,23 +13,6 @@ define([
     initialize: function (options) {
       
       //Navigation Menu Slider
-      $('#search-expander').on('click',function(e){
-        e.preventDefault();
-        $('#search-expander').toggleClass('expanded');
-        $('#expander-handle').toggleClass('glyphicon-chevron-down');
-        $('#expander-handle').toggleClass('glyphicon-chevron-up');
-        
-        $('.search-form').toggleClass('form-expanded');
-      });
-
-
-      
-      /*$("#to-input").datepicker({
-        format: "yyyy-mm-dd",
-        weekStart: 1,
-        todayBtn: "linked",
-        todayHighlight: true
-      });*/
 
       _.bindAll(this, 'render', '_initialize_map', '_onReset', '_onLocationUpdated', '_onConcertsRetrieved');
       options.vent.bind('resetMap', this._onReset);
@@ -41,6 +25,7 @@ define([
       $(this.el).html(mainTemplate);
       
       that.map_container = {};
+      that.location_marker = null;
       that.markers = [];
       that.showsCircle = null;
 
@@ -51,11 +36,11 @@ define([
       var center = new google.maps.LatLng(43.580417999999995,7.125102);
       var styles = [
         {
-          elementType: "geometry",
+          elementType: "geometry"/*,
           stylers: [
             { lightness: 33 },
             { saturation: -90 }
-          ]
+          ]*/
         }
       ];
 
@@ -103,14 +88,19 @@ define([
         map: self.map_container
       });
 
-      this.markers.push(marker);
+      this.location_marker = marker;
     },
 
     _onReset: function() {
       console.log('resetting ...');
+      
+      if (this.location_marker != null)
+        this.location_marker.setMap(null);
+
       for (var i = 0; i < this.markers.length; i++) {
-        this.markers[i].setMap(null);
+        this.markers[i].remove();
       }
+      this.markers = [];
 
       if (this.showsCircle != null) {
         this.showsCircle.setMap (null);
@@ -118,27 +108,21 @@ define([
 
     },
 
-    _onConcertsRetrieved: function (concerts) {
+    _onConcertsRetrieved: function (data) {
       var self = this;
+      
+      var concerts = data.concerts;
       concerts.forEach (function (concert) {
 
-        var myLatlng = new google.maps.LatLng(concert.geometry.lat, concert.geometry.lon);
-        var marker = new google.maps.Marker({
-          'map': self.map_container,
-          'position': myLatlng,
-          'descr': myLatlng,
-          'icon': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        var marker = new ConcertMarkerView({
+          model: concert,
+          query: data.query,
+          map: self.map_container 
         });
-
-        google.maps.event.addListener(marker, 'click', self.show_concert_detail);
 
         self.markers.push(marker);
       });
     },
-
-    show_concert_detail: function () {
-      alert('toto');
-    }
 
 	});
   return MainView;

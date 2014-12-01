@@ -96,7 +96,10 @@ exports.concerts_by_bands = function () {
       "by_band": {
         "terms": {
           "field": "bandName.exact",
-          "size": 1000
+          "size": 1000,
+          "order": {
+            "_term": "asc"
+          }
         }
       }
     }
@@ -109,7 +112,7 @@ exports.concerts_by_bands = function () {
 			if (json.status === 404) {
 				deferred.resolve ([]);
 			} else {
-        console.dir(json);
+        console.dir(json.aggregations.by_band.buckets);
 				deferred.resolve(json.aggregations.by_band.buckets);
 			}
 		})
@@ -125,12 +128,19 @@ exports.concerts_by_bands = function () {
 
 exports.bands = function () {
   var deferred = Q.defer();
-	winston.info("concerts_by_bands");
+	winston.info("get all bands");
 	
   var query = {
     "query": {
       "match_all": {}
-    }
+    },
+    "sort": [
+      {
+        "name": {
+          "order": "asc"
+        }
+      }
+    ]
   };
     
 	elasticSearchClient.search(config.es.index, 'band', query)

@@ -1,14 +1,7 @@
 .expander {
   background: none repeat scroll 0 0 #FFFFFF;
-  width: 66.6667%;
-  left:16.6667%;
-  position: fixed;
-  top: 0px;
- 
-  transition: top 0.3s ease-in-out 0s;
-  -webkit-transition: top 0.3s ease-in-out 0s;
-  -moz-transition: top 0.3s ease-in-out 0s;
-  -o-transition: top 0.3s ease-in-out 0s;
+  background-color: #F5F5F5;
+  display: block;
  
 }
 
@@ -17,15 +10,8 @@
 }
 
 .expanded {
-  top: 221px;
-
-  transition: top 0.3s ease-in-out 0s;
-  -webkit-transition: top 0.3s ease-in-out 0s;
-  -moz-transition: top 0.3s ease-in-out 0s;
-  -o-transition: top 0.3s ease-in-out 0s;
- 
+    top: 271px;
 }
-
 
 i.glyphicon {
   font-size: 24px;
@@ -33,20 +19,9 @@ i.glyphicon {
 
 .search-form {
   background: none repeat scroll 0 0 #FFFFFF;
-  /*top: -221px;*/
-  top: -220px;
-  
-  transition: top 0.3s ease-in-out 0s;
-  -webkit-transition: top 0.3s ease-in-out 0s;
-  -moz-transition: top 0.3s ease-in-out 0s;
-  -o-transition: top 0.3s ease-in-out 0s;
- 
+  display: none;
 }
-.form-expanded {
-  top: 0px;
 
-  transition: top 0.3s ease-in-out 0s;
-  -webkit-transition: top 0.3s ease-in-out 0s;
-  -moz-transition: top 0.3s ease-in-out 0s;
-  -o-transition: top 0.3s ease-in-out 0s;
+.form-expanded {
+  display: block;
 }
