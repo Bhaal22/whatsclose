@@ -36,19 +36,28 @@ define([
       var center = new google.maps.LatLng(43.580417999999995,7.125102);
       var styles = [
         {
-          elementType: "geometry"/*,
+          elementType: "geometry",
           stylers: [
-            { lightness: 33 },
-            { saturation: -90 }
-          ]*/
+            { lightness: 10 },
+            { saturation: 0 }
+          ]
         }
       ];
 
       var mapOptions = {
-          zoom: 6,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          center: center,
-          styles: styles
+        zoom: 6,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: center,
+        styles: styles,
+        streetViewControl: false,
+        mapTypeControl: false,
+        panControl: false,
+        zoomControl: true,
+        zoomControlOptions: {
+          style: google.maps.ZoomControlStyle.LARGE,
+          position: google.maps.ControlPosition.RIGHT_BOTTOM
+        }
+
       };
       this.map_container = new google.maps.Map(document.getElementById('map-container'),
                                                mapOptions);
