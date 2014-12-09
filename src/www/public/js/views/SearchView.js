@@ -102,7 +102,7 @@ define([
 
     _reset: function(elt) {
 
-      console.log('resetting ....');
+      console.log('SearchView resetting ....');
       var self = this;
       var deferred = $.Deferred();
       
