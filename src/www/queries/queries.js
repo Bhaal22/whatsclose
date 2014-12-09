@@ -72,6 +72,12 @@ exports.filterByGeolocation = function (position, radius) {
       return null;
     }
     else {
+    	// We test if characters are present in the radius input. If not, we add 'km' suffix.
+    	var regexp = /\D/g;
+    	if (!regexp.test(radius)){
+    		radius += 'km';
+    	}
+    	
       filter.geo_distance.distance = radius;
     }
     return filter;
