@@ -1,17 +1,36 @@
-exports.bandNameQuery = function(bandName) {
+function _bandNameDSL (bandName) {
+  var dsl = {
+    term: { "bandName.exact": bandName }
+  };
+
+  return dsl;
+}
+
+function _bandNamesDSL (bandNames) {
+  var dsl = bandNames.map(_bandNameDSL);
+
+  console.dir(dsl);
+  return dsl;
+}
+
+
+exports.bandNameQuery = function(bandNames) {
 	var query = {
 		"size" : 100, // Number of results to return
 		"query" : {
 			"filtered" : {
 				"query" : {
-					"match" : {
-						"bandName.exact": bandName
-					}
+          "bool": {
+					  "should" : _bandNamesDSL(bandNames)
+          }
 				}
 			}
 		}
 	};
-	
+  
+
+  //console.dir(query);
+  console.dir(query.query.filtered.query.should);
 	return query;
 };
 
