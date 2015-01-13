@@ -87,7 +87,11 @@ router.route('/concerts')
   .get (function (req, res) {
     var bandNames = [];
 
-    bandNames = req.query.bandNames.split(',').map(Function.prototype.call, String.prototype.trim);
+    console.log(typeof req.query.bandNames);
+    if (typeof req.query.bandNames === "string") 
+      bandNames.push(req.query.bandNames);
+    else
+      bandNames = req.query.bandNames.split(',').map(Function.prototype.call, String.prototype.trim);
     
     console.dir(bandNames);
     var params = {

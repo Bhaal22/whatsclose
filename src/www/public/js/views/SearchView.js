@@ -78,7 +78,7 @@ define([
           
           concerts.fetch ({ 
             data: { 
-              bandName: $(self.band).val(),
+              bandNames: $(self.band).val(),
               location: location,
               from: $(self.from).val(),
               to: $(self.to).val(),
