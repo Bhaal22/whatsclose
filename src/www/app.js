@@ -51,7 +51,6 @@ app.get('/', function(req, res) {
 });
 
 var searcher = require('./modules/searcher');
-
 var router = require('./api/api.band.js');
 
 app.use('/api', router);
