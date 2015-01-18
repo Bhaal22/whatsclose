@@ -1,5 +1,8 @@
 var express = require('express');
 
+var searcher = require(__base + 'modules/searcher');
+
+
 var router = express.Router();
 
 router.route('/bands')

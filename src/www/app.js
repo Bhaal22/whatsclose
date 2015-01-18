@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 var searcher = require('./modules/searcher');
 var path = require('path');
 
+global.__base = __dirname + '/';
+
+
 var app = express();
 var server = http.Server(app);
 
