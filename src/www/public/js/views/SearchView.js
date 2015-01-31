@@ -23,7 +23,7 @@ define([
       this.vent = options.vent;
       this.el = options.location;
 
-      _.bindAll(this, 'render', '_reset', '_search', '_updateLocation');
+      _.bindAll(this, 'render', '_reset', '_search', '_updateLocation', '_validate');
     },
 
     render: function () {
@@ -62,13 +62,34 @@ define([
       today.setDate(today.getDate() + 21);
       $('#to-input').datepicker('update', today);
 
+      $(that.radius).val("100km");
       $('#search-button').click(this._search);
 
       this.band_selector = new BandSelectorView({});
 		},
 
+    _validate: function(elt) {
+      var self = this;
+      var pattern = $(self.radius).attr('pattern');
+
+      var content = $(self.radius).val();
+      var re = new Regex(pattern, content);
+
+      
+      
+      console.log(pattern);
+
+      return true;
+    },
+    
+    
     _search: function (elt) {
       var self = this;
+
+
+      if (self._validate(elt)) {
+      }
+         
       var concerts = new Concerts ();
 
       this._reset(elt).done(function() {

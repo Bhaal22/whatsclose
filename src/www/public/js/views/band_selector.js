@@ -34,9 +34,7 @@ define([
      
       this.bands.models.forEach(function(band) {
 
-        //console.dir(band);
         var value = band.get('name');
-
         var string = band.get('name') + ' (' + band.get('count') + ')';
 
         $('#bands').append("<option value='" + value + "'>" + string + "</option>");
