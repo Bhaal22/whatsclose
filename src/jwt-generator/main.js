@@ -23,5 +23,5 @@ console.log(decoded);
 
 // verify a token symmetric
 jwt.verify(token, secret, function(err, decoded) {
-
+    
 });
