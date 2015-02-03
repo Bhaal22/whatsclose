@@ -4,15 +4,15 @@ whatsclose
 Search engine for Bands !
 
 For the moment :
-    * Andreas & Nicolas
-    * Arch Enemy
-    * Dark Tranquility
-    * Dropkick Murphys
-    * Rise Against
-    * Sabaton 
-    * Social Distortion
-    * Tagada Jones
-    * Volbeat
+ *Andreas & Nicolas
+ *Arch Enemy
+ *Dark Tranquility
+ *Dropkick Murphys
+ *Rise Against
+ *Sabaton 
+ *Social Distortion
+ *Tagada Jones
+ *Volbeat
 
 #Indexer
 ## ElasticSearch version : 1.4
