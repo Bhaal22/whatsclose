@@ -24,6 +24,9 @@ define([
       this.el = options.location;
 
       _.bindAll(this, 'render', '_reset', '_search', '_updateLocation', '_validate');
+
+      
+      
     },
 
     render: function () {
@@ -73,22 +76,21 @@ define([
       var pattern = $(self.radius).attr('pattern');
 
       var content = $(self.radius).val();
-      var re = new Regex(pattern, content);
-
+      var regex = /(\d+)(km)?/i;
       
-      
-      console.log(pattern);
-
-      return true;
+      var match = regex.exec(content);
+      console.dir(match);
+      if ((match) && (match[2] === undefined)) {
+        content = content.concat("km");
+        $(self.radius).val(content);
+      }
     },
     
     
     _search: function (elt) {
       var self = this;
 
-
-      if (self._validate(elt)) {
-      }
+      self._validate(elt);
          
       var concerts = new Concerts ();
 
