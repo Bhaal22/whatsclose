@@ -11,8 +11,6 @@ global.__base = __dirname + '/';
 var app = express();
 var server = http.Server(app);
 
-require('datejs');
-
 console.log("setting ejs engine");
 
 app.set('views', __dirname + '/views');
