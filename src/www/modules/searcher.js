@@ -19,10 +19,10 @@ var serverOptions = {
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
 
-exports.search= function (params) {
+exports.search = function (params) {
 	var deferred = Q.defer();
 	
-	var query = bandNameQuery(params.bandName);
+	var query = bandNameQuery(params.bandNames);
   var dateFilter = filterByDate(params.from, params.to);
   var geolocFilter = filterByGeolocation(params.location, params.radius);
   

@@ -49,28 +49,42 @@ define([
       }
 
       self.marker.infowindow = new google.maps.InfoWindow({
-        content: content
+        content: content,
+        clicked: false
       });
 
       google.maps.event.addListener(self.marker, 'mouseover', self.show_concert_info);
       google.maps.event.addListener(self.marker, 'mouseout', self.hide_concert_info);
       google.maps.event.addListener(self.marker, 'click', self.show_concert_detail);
+
+      google.maps.event.addListener(self.marker.infowindow, 'closeclick', function() {
+        this.clicked = !this.clicked;
+      });
     },
 
     //---------------------------------------
     // Event handlers for marker events
     //---------------------------------------
     show_concert_detail : function(){
-      this.infowindow.close();
-      App.show_content();
+      this.infowindow.clicked = !this.infowindow.clicked
+      if (this.infowindow.clicked) {
+        this.infowindow.open(this.map, this);
+      }
+      else {
+        this.infowindow.close();
+      }
     },
 
     hide_concert_info : function(){
-      this.infowindow.close();
+      if (! this.infowindow.clicked) {
+        this.infowindow.close();
+      }
     },
 
     show_concert_info : function(){
-      this.infowindow.open(this.map, this);
+      if (! this.infowindow.clicked) {
+        this.infowindow.open(this.map, this);
+      }
     },
 
     render: function() { },

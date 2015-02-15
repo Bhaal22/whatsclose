@@ -1,4 +1,3 @@
-var es = require('elasticsearch');
 // It seems that elasticsearch.Client doens't close the connection, that's why the indexer doesn't stop... => using elasticsearchclient instead
 var esClient = require('elasticsearchclient');
 
@@ -9,13 +8,10 @@ var winston = require(__base + 'services/CustomWinston');
 /** fired events **/
 
 /** attributes **/
-function Indexer () {
+function Indexer (client) {
   this.index = 'whatsclose';
   this.type = '';
-  this.es_client = new es.Client ({
-    host: 'localhost:9200',
-    port: '9200'
-  });
+  this.es_client = client;
 }
 
 /** methods **/
@@ -27,10 +23,14 @@ Indexer.prototype = {
   exists: function (data) {
     throw 'Not implemented';
   },
+  
+  update: function (id, data) {
+    /** do nothing **/
+  },
 
   publish: function (data) {
     var self = this;
-    var concert = data;
+    var _data = data;
 
     this.exists (data)
       .catch (function (error) {
@@ -38,14 +38,13 @@ Indexer.prototype = {
         self.es_client.create({
           index: self.index,
           type: self.type,
-          body: concert
+          body: _data
         }, function (err, resp) {
           if (err != undefined)
             console.log ('error %s', err);
-
-          //console.log ('resp %s', resp);
-          //console.log(resp);
         });
+      }).then(function(id) {
+        self.update(id, _data);
       });
   }
 };

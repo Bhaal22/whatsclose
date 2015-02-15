@@ -64,13 +64,21 @@ define([
     },
 
     _onLocationUpdated : function(area){
-      var marker = new google.maps.Marker({
+      var image = {
+        url: 'img/target-icon.png',
+        // This marker is 20 pixels wide by 32 pixels tall.
+        size: new google.maps.Size(32, 32),
+        // The origin for this image is 0,0.
+        origin: new google.maps.Point(0,0),
+        // The anchor for this image is the base of the flagpole at 0,32.
+        anchor: new google.maps.Point(16, 16)
+      };
+
+      this.location_marker = new google.maps.Marker({
         'map': this.map_container,
         'position': area.location,
-        'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        'icon': image
       });
-
-      this.map_container.setCenter(area.location);
 
       var regex = /\d+/;
       var match = area.radius.match(regex);
@@ -92,19 +100,17 @@ define([
       };
       this.showsCircle = new google.maps.Circle(options);
 
-      var marker = new google.maps.Marker({
-        position: area.location,
-        map: self.map_container
-      });
-
-      this.location_marker = marker;
+      this.map_container.setCenter(this.location_marker.position);
     },
 
     _onReset: function() {
-      console.log('resetting ...');
+      console.log('IndexView resetting ...');
       
+      console.log(this.location_marker);
       if (this.location_marker != null)
         this.location_marker.setMap(null);
+
+      this.location_marker = null;
 
       for (var i = 0; i < this.markers.length; i++) {
         this.markers[i].remove();

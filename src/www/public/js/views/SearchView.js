@@ -78,7 +78,7 @@ define([
           
           concerts.fetch ({ 
             data: { 
-              bandName: $(self.band).val(),
+              bandNames: $(self.band).val(),
               location: location,
               from: $(self.from).val(),
               to: $(self.to).val(),
@@ -102,7 +102,7 @@ define([
 
     _reset: function(elt) {
 
-      console.log('resetting ....');
+      console.log('SearchView resetting ....');
       var self = this;
       var deferred = $.Deferred();
       

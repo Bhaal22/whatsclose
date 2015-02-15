@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "elasticsearch": "^2.4.3",
-    "q": "^1.0.1"
+    "q": "^1.1.2"
   }
 }

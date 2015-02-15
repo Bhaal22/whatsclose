@@ -10,8 +10,9 @@ var CRAWLING_BAND = 'crawling_band';
 /** fired events **/
 
 /** attributes **/
-function BandIndexer() {
+function BandIndexer(client) {
   this.type = 'band';
+  this.es_client = client;
 }
 
 BandIndexer.prototype = new root_indexer.I();
@@ -26,6 +27,19 @@ BandIndexer.prototype.init = function () {
   });
   
 };
+
+BandIndexer.prototype.update = function (id, band) {
+  this.es_client.update({
+    index: this.index,
+    type: this.type,
+    id: id,
+    body: {
+      doc: {
+        last_crawl_date: band.last_crawl_date
+      }
+    }
+  });
+}
 
 BandIndexer.prototype.exists = function (band) {
   return this.es_client.search ({
@@ -49,7 +63,7 @@ BandIndexer.prototype.exists = function (band) {
       deferred.reject (Error (results));
     }
     else  {
-      deferred.resolve ();
+      deferred.resolve (body.hits.hits[0]._id);
     }
     
     return deferred.promise;
