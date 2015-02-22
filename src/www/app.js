@@ -90,10 +90,9 @@ function getClientIp(req) {
 };
 
 module.exports.startServer = function(port, hostname) {
-    if (hostname === undefined)
-	    hostname = '127.0.0.1';
-
-  console.log(port);
+  if (hostname === undefined)
+	  hostname = '127.0.0.1';
+  
   server.listen(port, hostname, function() {
 	  console.log('listening on *: %s %s', hostname, port);
   });
