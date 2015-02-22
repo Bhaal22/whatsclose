@@ -1,6 +1,6 @@
 module.exports = {
     web : {
-        port: 3000
+        port: 3443
     },
     version : {
         major: 0,

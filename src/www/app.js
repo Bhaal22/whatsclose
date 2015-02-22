@@ -1,15 +1,22 @@
 var express = require('express');
-var http = require('http');
+var https = require('https');
 var helpers = require('express-helpers');
 var bodyParser = require('body-parser');
 var searcher = require('./modules/searcher');
 var path = require('path');
+var fs = require('fs');
 
 global.__base = __dirname + '/';
 
 
 var app = express();
-var server = http.Server(app);
+
+var options = {
+  key: fs.readFileSync('config/dev/ssl/whatsclose.key'),
+  cert: fs.readFileSync('config/dev/ssl/whatsclose.crt')
+};
+
+var server = https.createServer(options, app);
 
 console.log("setting ejs engine");
 
@@ -20,7 +27,7 @@ app.use(bodyParser.urlencoded({
     extended: true 
 }));
 
-app.use(bodyParser.json() );
+app.use(bodyParser.json());
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -84,10 +91,11 @@ function getClientIp(req) {
 
 module.exports.startServer = function(port, hostname) {
     if (hostname === undefined)
-	hostname = '127.0.0.1';
+	    hostname = '127.0.0.1';
 
-    server.listen(port, hostname, function() {
-	console.log('listening on *: %s %s', hostname, port);
-    });
+  console.log(port);
+  server.listen(port, hostname, function() {
+	  console.log('listening on *: %s %s', hostname, port);
+  });
 };
 
