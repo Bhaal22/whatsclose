@@ -7,6 +7,9 @@
 *.sln.docstates
 *.*~
 node_modules
+*.key
+*.crt
+*.csr
 
 # Build results
 

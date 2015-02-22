@@ -1,5 +1,4 @@
 var express = require('express');
-var https = require('https');
 var helpers = require('express-helpers');
 var bodyParser = require('body-parser');
 var searcher = require('./modules/searcher');
@@ -10,13 +9,6 @@ global.__base = __dirname + '/';
 
 
 var app = express();
-
-var options = {
-  key: fs.readFileSync('config/dev/ssl/whatsclose.key'),
-  cert: fs.readFileSync('config/dev/ssl/whatsclose.crt')
-};
-
-var server = https.createServer(options, app);
 
 console.log("setting ejs engine");
 
@@ -89,9 +81,23 @@ function getClientIp(req) {
     return ipAddress;
 };
 
-module.exports.startServer = function(port, hostname) {
+module.exports.startServer = function(port, isHttp, hostname) {
   if (hostname === undefined)
 	  hostname = '127.0.0.1';
+
+  var http;
+  var options = {};
+  if (isHttp)
+    http = require('http');
+  else {
+    http = require('https');
+    options = {
+      key: fs.readFileSync('etc/ssl/whatsclose.key'),
+      cert: fs.readFileSync('etc/ssl/whatsclose.crt')
+    };
+  }
+  
+  var server = https.createServer(options, app);
   
   server.listen(port, hostname, function() {
 	  console.log('listening on *: %s %s', hostname, port);
