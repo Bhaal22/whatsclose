@@ -1,7 +1,7 @@
 module.exports = {
     web : {
       port: 3443,
-      https: true,
+      http: false,
       key: 'whatsclose.key',
       ceet: 'whatsclose.cert'
     },

@@ -75,7 +75,7 @@ function getClientIp(req) {
 	ipAddress = forwardedIps[0];
     }
     if (!ipAddress) {
-	ipAddress = req.connection.remoteAddress;
+	    ipAddress = req.connection.remoteAddress;
     }
     
     return ipAddress;
@@ -85,19 +85,19 @@ module.exports.startServer = function(port, isHttp, hostname) {
   if (hostname === undefined)
 	  hostname = '127.0.0.1';
 
-  var http;
-  var options = {};
-  if (isHttp)
-    http = require('http');
+  var server;
+  if (isHttp) {
+    var transport = require('http');
+    server = transport.createServer(app);
+  }
   else {
-    http = require('https');
-    options = {
+    console.log('https');
+    var options = {
       key: fs.readFileSync('etc/ssl/whatsclose.key'),
       cert: fs.readFileSync('etc/ssl/whatsclose.crt')
     };
+    server = transport.createServer(options, app);
   }
-  
-  var server = https.createServer(options, app);
   
   server.listen(port, hostname, function() {
 	  console.log('listening on *: %s %s', hostname, port);
