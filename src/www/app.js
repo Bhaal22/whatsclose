@@ -92,15 +92,16 @@ module.exports.startServer = function(port, isHttp, hostname) {
   }
   else {
     console.log('https');
+    transport = require('https');
     var options = {
       key: fs.readFileSync('etc/ssl/whatsclose.key'),
       cert: fs.readFileSync('etc/ssl/whatsclose.crt')
     };
     server = transport.createServer(options, app);
+
+    server.listen(port, hostname, function() {
+	    console.log('listening on *: %s %s', hostname, port);
+    });
   }
-  
-  server.listen(port, hostname, function() {
-	  console.log('listening on *: %s %s', hostname, port);
-  });
 };
 
