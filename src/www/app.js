@@ -7,7 +7,6 @@ var fs = require('fs');
 
 global.__base = __dirname + '/';
 
-
 var app = express();
 
 console.log("setting ejs engine");
