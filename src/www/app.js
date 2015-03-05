@@ -97,10 +97,10 @@ module.exports.startServer = function(port, isHttp, hostname) {
       cert: fs.readFileSync('etc/ssl/whatsclose.crt')
     };
     server = transport.createServer(options, app);
-
-    server.listen(port, hostname, function() {
-	    console.log('listening on *: %s %s', hostname, port);
-    });
   }
+
+  server.listen(port, hostname, function() {
+	  console.log('listening on *: %s %s', hostname, port);
+  });
 };
 
