@@ -11,7 +11,6 @@ define([
       this.collection = response;
       
       _.bindAll(this, 'addOne', 'addAll');
-      //this.collection.bind('reset', this.addAll);
     },
 
     addOne: function(country){

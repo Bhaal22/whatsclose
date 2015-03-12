@@ -24,7 +24,6 @@ define([
       self.marker = new google.maps.Marker({
         map: self.map,
         position: myLatlng,
-        /*icon : 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',*/
         descr : myLatlng
       });
 

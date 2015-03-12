@@ -11,6 +11,7 @@ var bandNameQuery = require('../queries/queries').bandNameQuery;
 var allSylesQuery = require('../queries/queries').allSylesQuery;
 var filterByDate = require('../queries/queries').filterByDate;
 var filterByGeolocation = require('../queries/queries').filterByGeolocation;
+var venue = require('../queries/queries').venue;
 
 var serverOptions = {
 	host: config.es.hostname,
@@ -73,6 +74,30 @@ exports.getAllStyles = function() {
 				deferred.resolve ([]);
 			} else {
 				deferred.resolve(json.aggregations.styles.buckets);
+			}
+		})
+		.on('error', function(error) {
+			console.log(error);
+			deferred.reject(error);
+		})
+		.exec();
+	
+	return deferred.promise;
+};
+
+exports.venue = function(id) {
+	var deferred = Q.defer();
+
+  console.dir(venue(id));
+	elasticSearchClient.search(config.es.index, 'venue', venue(id))
+		.on('data', function(data) {
+			var json = JSON.parse(data);
+
+			if (json.status === 404){
+				deferred.resolve ([]);
+			} else {
+        var result = json.hits.hits[0] || { _source: {}};
+				deferred.resolve(result._source);
 			}
 		})
 		.on('error', function(error) {

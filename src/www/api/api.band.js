@@ -79,9 +79,18 @@ router.route('/styles')
     };
   });
 
+router.route('/venues/:id')
+  .get (function (req, res) {
+    var p = searcher.venue(req.params.id);
+
+    p.then (function (data) {
+      res.json(data);
+    });
+  });
+
 router.route('/version')
   .get(function(req, res) {
-    res.json({version: '0.2'});
+    res.json({version: '0.3'});
   });
 
 

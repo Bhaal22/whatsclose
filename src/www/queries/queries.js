@@ -45,6 +45,18 @@ exports.allSylesQuery = {
 	}
 };
 
+exports.venue = function(venueName) {
+	var query = {
+		"size" : 100, // Number of results to return
+		"query" : {
+			"match": {
+        "name": venueName
+      }
+		}
+	};
+	return query;
+};
+
 //GET /whatsclose.dev/_search?search_type=scan&scroll=1m
 
 
