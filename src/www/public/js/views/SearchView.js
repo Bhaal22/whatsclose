@@ -42,6 +42,10 @@ define([
         $('.search-form').toggleClass('form-expanded');
       });
 
+      $('#band-input').on('', function (e) {
+        
+      });
+
       $("#from-input").datepicker({
         format: "yyyy-mm-dd",
         weekStart: 1,

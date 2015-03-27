@@ -33,6 +33,7 @@ define([
       var dt = (new Date(self.model.date) - new Date()) /(1000*60*60*24);
       console.log("%s %s %s", self.model.date, from, dt)
 
+      //VenueModel.model(
       
       var content = "<h1>@" + self.model.venue + "</h1>";
       content += "<div class='date'>" + self.model.date + "</div>";

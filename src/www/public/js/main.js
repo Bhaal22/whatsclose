@@ -7,7 +7,8 @@ require.config({
     datepicker: 'bootstrap-datepicker',
     underscore: 'libs/underscore/underscore-min', // https://github.com/amdjs
     backbone: 'libs/backbone/backbone-min', // https://github.com/amdjs
-
+    typeahead: 'libs/typeahed/typeahead.bundle.min.js, //https://github.com/twitter/typeahead.js
+    
     // Require.js plugins
     text: 'libs/require/text',
 

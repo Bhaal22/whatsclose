@@ -2,7 +2,6 @@
   background: none repeat scroll 0 0 #FFFFFF;
   background-color: #F5F5F5;
   display: block;
- 
 }
 
 .expander:hover,.expander>a:hover,.expander>a>i:hover {
@@ -11,6 +10,10 @@
 
 .expanded {
     top: 271px;
+}
+
+textarea {
+    resize: none;
 }
 
 i.glyphicon {
