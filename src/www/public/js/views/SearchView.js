@@ -46,6 +46,7 @@ define([
         
       });
 
+      /*
       $("#from-input").datepicker({
         format: "yyyy-mm-dd",
         weekStart: 1,
@@ -68,6 +69,9 @@ define([
 
       today.setDate(today.getDate() + 21);
       $('#to-input').datepicker('update', today);
+      */
+
+      $(".input-daterange").datepicker({});
 
       $(that.radius).val("100km");
       $('#search-button').click(this._search);
