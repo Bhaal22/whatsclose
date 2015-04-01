@@ -4,7 +4,7 @@ define([
   'backbone',
   'views/IndexView',
   'views/LocationView',
-  'views/SearchView',
+  '/components/search/views/SimpleSearchView.js',
   'views/AboutView'
 ], function ($, _, Backbone, IndexView, LocationView, SearchView, AboutView) {
   

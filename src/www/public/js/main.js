@@ -4,7 +4,6 @@ require.config({
   paths: {
     // Major libraries
     jquery: 'libs/jquery/jquery-min',
-    datepicker: 'bootstrap-datepicker.min',
     underscore: 'libs/underscore/underscore-min', // https://github.com/amdjs
     backbone: 'libs/backbone/backbone-min', // https://github.com/amdjs
     //typeahead: 'libs/typeahed/typeahead.bundle.min.js, //https://github.com/twitter/typeahead.js

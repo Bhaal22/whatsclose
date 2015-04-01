@@ -3,7 +3,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!/templates/locationTemplate.html',
+  'text!/pages/locationTemplate.html',
 ], function($, _, Backbone, locationTemplate){
   
   var LocationView = Backbone.View.extend({

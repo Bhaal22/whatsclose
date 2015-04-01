@@ -5,11 +5,11 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'components/criteriaSelection/views/CriteriaView',
-  'components/datepicker/views/DatePickerView',
-  'components/location/views/LocationView',
+  //'/components/criteriaSelection/views/CriteriaView',
+  //'/components/datepicker/views/DatePickerView',
+  //'/components/location/views/LocationView',
   'text!/components/search/templates/search.html',
-], function($, _, Backbone, CriteriaView, DatePickerView, LocationView, searchTemplate){
+], function($, _, Backbone, /*CriteriaView, DatePickerView, LocationView,*/ searchTemplate){
 
   
   var view = Backbone.View.extend({

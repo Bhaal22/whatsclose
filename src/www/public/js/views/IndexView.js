@@ -3,7 +3,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!/templates/mainTemplate.html',
+  'text!/pages/mainTemplate.html',
   'views/concert_marker_view'
 ], function($, _, Backbone, mainTemplate, ConcertMarkerView){
   
