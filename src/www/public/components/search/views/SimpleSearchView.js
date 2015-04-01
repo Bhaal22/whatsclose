@@ -1,13 +1,15 @@
+"use strict";
+
 
 define([
   'jquery',
-  'datepicker',
   'underscore',
   'backbone',
-  'collections/concerts',
-  'views/band_selector',
-  'text!/templates/searchTemplate.html',
-], function($, dp, _, Backbone, Concerts, BandSelectorView, searchTemplate){
+  'components/criteriaSelection/views/CriteriaView',
+  'components/datepicker/views/DatePickerView',
+  'components/location/views/LocationView',
+  'text!/components/search/templates/search.html',
+], function($, _, Backbone, CriteriaView, DatePickerView, LocationView, searchTemplate){
 
   
   var view = Backbone.View.extend({
