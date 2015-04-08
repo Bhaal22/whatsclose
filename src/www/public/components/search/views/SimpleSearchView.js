@@ -9,6 +9,7 @@ define([
   //'/components/datepicker/views/DatePickerView',
   //'/components/location/views/LocationView',
   'text!/components/search/templates/search.html',
+  'css!/components/search/css/expander'
 ], function($, _, Backbone, /*CriteriaView, DatePickerView, LocationView,*/ searchTemplate){
 
   
