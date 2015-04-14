@@ -9,10 +9,14 @@ define([
   var view = Backbone.View.extend({
 
     initialize: function(options) {
+
+      this.vent = options.vent;
+      this.el = options.location;
+      
       _.bindAll(this, 'render');
     }
     
   });
 
   return view;
-}
+});
