@@ -11,6 +11,12 @@ define([
   
   var view = Backbone.View.extend({
     
+    /**
+     * DOM component unique ID
+     * @type {Integer}
+     */
+    htmlID: null,
+    
     options:{
       
       /**
@@ -52,6 +58,7 @@ define([
     initialize: function (options) {
       this.options = options;
       this.el = options.location;
+      this.htmlID = _.uniqueId();
 
       _.bindAll(this, 'render', '_searchTerm', '_addTag', '_removeTag', '_resizeInputField');
       //this.vent.bind('resetMap', this._onReset);
@@ -60,11 +67,14 @@ define([
 
     render: function () {
       // Internal rendering
-      $(this.el).html(criteriaTemplate);
-      this.tagsComponent = $('#freds-tags');
-      this.inputComponent = $('#freds-input');
+      var renderedTemplate = _.template(criteriaTemplate, {htmlID: this.htmlID});
+      $(this.el).html(renderedTemplate);
 
-      // events binding
+      // Internal components reference
+      this.tagsComponent = $('#' + this.htmlID + '-tags');
+      this.inputComponent = $('#' + this.htmlID + '-input');
+
+      // Events binding
       this.inputComponent.keyup(this._searchTerm);
 
 		},
