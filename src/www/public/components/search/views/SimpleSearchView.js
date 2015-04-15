@@ -5,12 +5,12 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  //'/components/criteriaSelection/views/CriteriaView',
+  '/components/criteriaSelection/views/CriteriaView.js',
   //'/components/datepicker/views/DatePickerView',
   //'/components/location/views/LocationView',
   'text!/components/search/templates/search.html',
   'css!/components/search/css/expander'
-], function($, _, Backbone, /*CriteriaView, DatePickerView, LocationView,*/ searchTemplate){
+], function($, _, Backbone, CriteriaView, /*DatePickerView, LocationView,*/ searchTemplate){
 
   
   var view = Backbone.View.extend({
@@ -27,8 +27,10 @@ define([
 
     render: function () {
       
-			var that = this;
-      $(this.el).html(searchTemplate);
+			$(this.el).html(searchTemplate);
+
+      var criteriaView = new CriteriaView ({ 'vent': this.vent, 'location': '#criteria-fields' });
+      criteriaView.render ();
 		}
 
 	});
