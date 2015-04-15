@@ -5,17 +5,12 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  '/components/core/WhatsCloseView.js',
   'text!/components/criteriaSelection/templates/criteriaSelection.html',
-], function($, _, Backbone, criteriaTemplate){
+], function($, _, Backbone, WCView, criteriaTemplate){
 
   
-  var view = Backbone.View.extend({
-    
-    /**
-     * DOM component unique ID
-     * @type {Integer}
-     */
-    htmlID: null,
+  var view = WCView.extend({
     
     options:{
       
@@ -42,24 +37,12 @@ define([
        */
       enableDateCriteria: false,
 
-      /**
-       * DOM container where the tags are set
-       * @type {DIV}
-       */
-      tagsComponent: null,
-
-      /**
-       * DOM INPUT field where the user type the criteria terms
-       * @type {INPUT-TEXT}
-       */
-      inputComponent: null
     },
 
     initialize: function (options) {
       this.options = options;
       this.el = options.location;
-      this.htmlID = _.uniqueId();
-
+      
       _.bindAll(this, 'render', '_searchTerm', '_addTag', '_removeTag', '_resizeInputField');
       //this.vent.bind('resetMap', this._onReset);
       
@@ -67,15 +50,15 @@ define([
 
     render: function () {
       // Internal rendering
-      var renderedTemplate = _.template(criteriaTemplate, {htmlID: this.htmlID});
+      var renderedTemplate = _.template(criteriaTemplate, {htmlID: this.cid});
       $(this.el).html(renderedTemplate);
 
       // Internal components reference
-      this.tagsComponent = $('#' + this.htmlID + '-tags');
-      this.inputComponent = $('#' + this.htmlID + '-input');
+      this.subComponents[this.cid + '-tags'] = $('#' + this.cid + '-tags');
+      this.subComponents[this.cid + '-input'] = $('#' + this.cid + '-input');
 
       // Events binding
-      this.inputComponent.keyup(this._searchTerm);
+      this.subComponents[this.cid + '-input'].keypress(this._searchTerm);
 
 		},
 
@@ -83,16 +66,23 @@ define([
      * Analyse function of the entered input text
      * @return {[type]} [description]
      */
-    _searchTerm: function (){
-      var debug = true;
+    _searchTerm: function (event){
+      // Check if one of the following keys have been pressed : ';', 'ENTER', 'TAB'
+      if (event.key && (event.key === 'Enter' || event.key === 'Tab' || event.key === ' ' || event.key === ';')){
+        var inputValue = this.subComponents[this.cid + '-input'].val();
+        console.debug ('Extract tag : ' + inputValue);
+      }
+      else{
+        console.debug ('Nothing to do...');
+      }
     },
 
     _addTag: function (){
-      var debug = true;
+      console.debug ('_addTag');
     },
 
     _removeTag: function (){
-      var debug = true;
+      console.debug ('_removeTag');
     },
 
     /**
@@ -100,7 +90,7 @@ define([
      * @return {[type]} [description]
      */
     _resizeInputField: function (){
-      var debug = true;
+      console.debug ('_resizeInputField');
     }
 
 	});
