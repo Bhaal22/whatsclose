@@ -15,17 +15,10 @@ define([
   
   var view = Backbone.View.extend({
 
-    /**
-     * DOM component unique ID
-     * @type {Integer}
-     */
-    htmlID: null,
-
     initialize: function (options) {
       this.vent = options.vent;
       this.el = options.location;
-      this.htmlID = _.uniqueId();
-
+    
       _.bindAll(this, 'render');
 
       
@@ -34,11 +27,11 @@ define([
 
     render: function () {
       // Internal rendering
-      var renderedTemplate = _.template(searchTemplate, {htmlID: this.htmlID});
+      var renderedTemplate = _.template(searchTemplate, {htmlID: this.cid});
       $(this.el).html(renderedTemplate);
 
       // Sub-components instanciation & rendering
-      var criteriaView = new CriteriaView ({ 'vent': this.vent, 'location': '#' + this.htmlID + '-criteria-fields' });
+      var criteriaView = new CriteriaView ({ 'vent': this.vent, 'location': '#' + this.cid + '-criteria-fields' });
       criteriaView.render ();
 		}
 
