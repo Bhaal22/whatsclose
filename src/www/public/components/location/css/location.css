@@ -1,0 +1,16 @@
+.placeholder-location-radius {
+    background: #FFF;
+    width: 300px;
+    padding: 10px;
+}
+
+.distances-choice {
+    height: 0px;
+    visibility: hidden;
+    text-align: right;
+    z-index:1;
+}
+
+.from-location {
+    display: inline-block;
+}
