@@ -5,10 +5,7 @@
 }
 
 .distances-choice {
-    height: 0px;
-    visibility: hidden;
-    text-align: right;
-    z-index:1;
+    text-align: left;
 }
 
 .from-location {
