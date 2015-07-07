@@ -43,14 +43,6 @@ define([
         var selText = $(this).text();
         $(this).parents('.input-group-btn').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
       });
-
-$("#btnSearch").click(function(){
-	alert($('.btn-select').text()+", "+$('.btn-select2').text());
-});
-
-      // Internal components reference
-      // this.subComponents[this.cid + '-tags'] = $('#' + this.cid + '-tags');
-      // this.subComponents[this.cid + '-input'] = $('#' + this.cid + '-input');
 		}
 	});
   return view;

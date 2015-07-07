@@ -28,3 +28,8 @@ i.glyphicon {
 .form-expanded {
   display: block;
 }
+
+#search-container {
+    width: 500px;
+    padding: 10px;
+}
