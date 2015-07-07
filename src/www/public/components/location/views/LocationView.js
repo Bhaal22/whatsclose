@@ -39,6 +39,12 @@ define([
       var renderedTemplate = _.template(LocationTemplate, {htmlID: this.cid});
       $(this.el).html(renderedTemplate);
 
+      $("#" + this.cid + "-radius").on('click',function(e){
+        e.preventDefault();
+        $('#toto').toggleClass('distances-choice-hidden');
+        $('#toto').toggleClass('distances-choice-show');
+      });
+
       // Internal components reference
       // this.subComponents[this.cid + '-tags'] = $('#' + this.cid + '-tags');
       // this.subComponents[this.cid + '-input'] = $('#' + this.cid + '-input');
