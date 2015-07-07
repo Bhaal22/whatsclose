@@ -39,12 +39,6 @@ define([
       var renderedTemplate = _.template(LocationTemplate, {htmlID: this.cid});
       $(this.el).html(renderedTemplate);
 
-      $("#" + this.cid + "-radius").on('click',function(e){
-        e.preventDefault();
-        $('#toto').toggleClass('distances-choice-hidden');
-        $('#toto').toggleClass('distances-choice-show');
-      });
-
       $(".dropdown-menu li a").click(function(){
         var selText = $(this).text();
         $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
