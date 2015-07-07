@@ -1,8 +1,22 @@
 <div class="placeholder-location-radius">
   <input id="<%= htmlID %>-from-location" class="from-location" name="location" type="text" role="textbox" placeholder="Location" />
-  
-  <div id="<%= htmlID %>-radius" class="from-location">
-    <div id="toto" class="distances-choice-hidden">
+
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Select a distance
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">20km</a></li>
+        <li><a href="#">100km</a></li>
+        <li><a href="#">200km</a></li>
+        <li><a href="#">500km</a></li>
+      </ul>
+    </div>
+
+    <!--
+    <div class="dist-choices">
+      <b>Choose Distance:</b>
       <div>
         <input type="radio" name="radius" value="10" />
         <label>
@@ -29,6 +43,20 @@
       </div>
     </div>
 
+    <a class="search-geoloc-distance-link" href="#" tabindex="-1">
+      <span class="search-geoloc-distance-label" data-default="Distance">200km</span>
+      <span class="bottom-border"></span>
+    </a>
+            
+  </div>
+  -->
+
+  
+  <!--
+  <div id="<%= htmlID %>-radius" class="from-location">
+    
+
     <span>100km</span>
   </div>
+  -->
 </div>

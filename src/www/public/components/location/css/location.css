@@ -4,17 +4,6 @@
     padding: 10px;
 }
 
-.distances-choice-hidden {
-    height: 0px;
-    text-align: left;
-    visibility: hidden;
-    z-index: 1;
-}
-
-.distances-choice-show {
-    text-align: left;
-}
-
 .from-location {
     display: inline-block;
 }
