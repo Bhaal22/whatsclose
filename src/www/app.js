@@ -82,7 +82,7 @@ function getClientIp(req) {
 
 module.exports.startServer = function(port, isHttp, hostname) {
   if (hostname === undefined)
-	  hostname = '127.0.0.1';
+	  hostname = '0.0.0.0';
 
   var server;
   if (isHttp) {
