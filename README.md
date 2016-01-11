@@ -35,7 +35,11 @@ For the moment :
   * in src/www directory
   * Build Container Image :
     * docker build -t whatsclose .
-  * Run Containers :
+    * docker build -t wc_front_end .
+  * Run Backend Containers :
     * docker run  -p 3000:3000 --name whatsclose1 --env NODE_ENV=dev whatsclose
     * docker run  -p 4000:3000 --name whatsclose2 --env NODE_ENV=dev whatsclose
+  * Run Front End Container :
+    * docker run -d --name wc_fe -p 8080:80 wc_front_end
+ 
   
