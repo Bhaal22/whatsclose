@@ -1,41 +1,40 @@
 {
-   "kind":"ReplicationController",
-   "apiVersion":"v1",
-   "metadata":{
-      "name":"redis-master",
-      "labels":{
-         "app":"redis",
-         "role":"master"
-      }
-   },
-   "spec":{
-      "replicas":1,
-      "selector":{
-         "app":"redis",
-         "role":"master"
+  "kind":"ReplicationController",
+  "apiVersion":"v1",
+  "metadata":{
+    "name":"whatsclose-backend",
+    "labels":{
+      "app":"whatsclose",
+      "role":"wc-backend"
+    }
+  },
+  "spec":{
+    "replicas":2,
+    "selector": {
+      "app":"whatsclose",
+      "role":"wc-backend"
+    },
+    "template":{
+      "metadata":{
+        "labels":{
+          "app":"whatsclose",
+          "role":"wc-backend"
+        }
       },
-      "template":{
-         "metadata":{
-            "labels":{
-               "app":"redis",
-               "role":"master"
-            }
-         },
-         "spec":{
-            "containers":[
-               {
-                  "name":"redis-master",
-                  "image":"redis",
-                  "ports":[
-                     {
-                        "name":"redis-server",
-                        "containerPort":6379
-                     }
-                  ]
-               }
+      "spec":{
+        "containers":[
+          {
+            "name":"whatsclose",
+            "image":"whatsclose",
+            "ports":[
+              {
+                "name":"whatsclose-restapi", "containerPort":3000
+              }
             ]
-         }
+          }
+        ]
       }
-   }
+    }
+  }
 }
 
