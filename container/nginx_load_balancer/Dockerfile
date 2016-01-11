@@ -1,3 +1,9 @@
-FROM node:4-onbuild
+# Set nginx base image
+FROM nginx
 
-EXPOSE 3000
+# File Author / Maintainer
+MAINTAINER Jonathan Muller (aka Bhaal22)
+
+# Copy custom configuration file from the current directory
+COPY nginx.conf /etc/nginx/nginx.conf
+
