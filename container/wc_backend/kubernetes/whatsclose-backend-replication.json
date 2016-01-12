@@ -28,7 +28,7 @@
             "image":"kona.brightcomputing.com:5000/whatsclose",
             "ports":[
               {
-                "name":"whatsclose-restapi", "containerPort":3000
+                "name":"whatsclose-api", "containerPort":3000
               }
             ]
           }
