@@ -1,0 +1,21 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"whatsclose-storage",
+      "labels":{
+         "app":"whatsclose",
+         "role":"es-storage"
+      }
+   },
+   "spec":{
+      "ports": [
+        { "port":9200, "targetPort":"es-rest-api" },
+        { "port":9300, "targetPort":"es-internal-api" },
+      ],
+      "selector":{
+         "app":"whatsclose",
+         "role":"es-storage"
+      }
+   }
+}

@@ -2,37 +2,33 @@
   "kind":"ReplicationController",
   "apiVersion":"v1",
   "metadata":{
-    "name":"whatsclose-backend",
+    "name":"whatsclose-storage",
     "labels":{
       "app":"whatsclose",
-      "role":"wc-backend"
+      "role":"es-storage"
     }
   },
   "spec":{
-    "replicas":4,
+    "replicas":1,
     "selector": {
       "app":"whatsclose",
-      "role":"wc-backend"
+      "role":"es-storage"
     },
     "template":{
       "metadata":{
         "labels":{
           "app":"whatsclose",
-          "role":"wc-backend"
+          "role":"es-storage"
         }
       },
       "spec":{
         "containers":[
           {
-            "name":"whatsclose",
-            "image":"kona.brightcomputing.com:5000/whatsclose",
+            "name":"es",
+            "image":"elasticsearch:latest",
             "ports":[
-              {
-                "name":"whatsclose-api", "containerPort":3000
-              }
-            ],
-	          "env": [
-              { "name": "NODE_ENV", "value": "dev" }
+              { "name":"es-rest-api", "containerPort":9200 },
+              { "name":"es-internal-api", "containerPort":9300 }
             ]
           }
         ]
