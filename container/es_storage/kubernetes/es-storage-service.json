@@ -11,7 +11,7 @@
    "spec":{
       "ports": [
         { "port":9200, "targetPort":"es-rest-api" },
-        { "port":9300, "targetPort":"es-internal-api" },
+        { "port":9300, "targetPort":"es-internal-api" }
       ],
       "selector":{
          "app":"whatsclose",
