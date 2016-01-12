@@ -12,7 +12,7 @@
       "ports": [
         {
           "port":3000,
-          "targetPort":"whatsclose-restapi"
+          "targetPort":"whatsclose-api"
         }
       ],
       "selector":{

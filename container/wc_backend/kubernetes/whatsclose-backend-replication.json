@@ -9,7 +9,7 @@
     }
   },
   "spec":{
-    "replicas":2,
+    "replicas":4,
     "selector": {
       "app":"whatsclose",
       "role":"wc-backend"
@@ -30,6 +30,9 @@
               {
                 "name":"whatsclose-api", "containerPort":3000
               }
+            ],
+	    "env": [
+              { "name": "NODE_ENV", "value": "dev" }
             ]
           }
         ]
