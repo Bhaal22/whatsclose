@@ -22,14 +22,22 @@
         }
       },
       "spec":{
+	"volumes": [
+      {
+        "name": "storage"
+      }
+    ],
         "containers":[
           {
             "name":"es",
             "image":"elasticsearch:latest",
             "ports":[
-              { "name":"es-rest-api", "containerPort":9200 },
-              { "name":"es-internal-api", "containerPort":9300 }
-            ]
+              { "name":"http", "containerPort":9200, "protocol": "TCP" },
+              { "name":"transport", "containerPort":9300, "protocol": "TCP" }
+            ],
+	    "volumeMounts": [
+	      { "mountPath": "/data", "name": "storage" }
+	    ]
           }
         ]
       }
