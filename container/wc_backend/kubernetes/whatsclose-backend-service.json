@@ -2,22 +2,22 @@
    "kind":"Service",
    "apiVersion":"v1",
    "metadata":{
-      "name":"redis-master",
+      "name":"whatsclose-backend",
       "labels":{
-         "app":"redis",
-         "role":"master"
+         "app":"whatsclose",
+         "role":"wc-backend"
       }
    },
    "spec":{
       "ports": [
         {
-          "port":6379,
-          "targetPort":"redis-server"
+          "port":3000,
+          "targetPort":"whatsclose-restapi"
         }
       ],
       "selector":{
-         "app":"redis",
-         "role":"master"
+         "app":"whatsclose",
+         "role":"wc-backend"
       }
    }
 }
