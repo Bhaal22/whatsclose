@@ -32,7 +32,9 @@
               }
             ],
 	          "env": [
-              { "name": "NODE_ENV", "value": "dev" }
+              { "name": "NODE_ENV", "value": "dev" },
+              { "name": "ELASTICSEARCH_IP", "$WHATSCLOSE_STORAGE_SERVICE_HOST" },
+              { "name": "ELASTICSEARCH_PORT", "$WHATSCLOSE_STORAGE_SERVICE_PORT_HTTP" }
             ]
           }
         ]
