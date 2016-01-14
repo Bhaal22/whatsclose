@@ -14,8 +14,8 @@ var filterByGeolocation = require('../queries/queries').filterByGeolocation;
 var venue = require('../queries/queries').venue;
 
 var serverOptions = {
-	host: process.env.elasticsearch_ip || config.es.hostname || "localhost",
-	port: process.env.elasticsearch_port || config.es.port || 9200
+	host: process.env.ELASTICSEARCH_IP || config.es.hostname || "localhost",
+	port: process.env.ELASTICSEARCH_PORT || config.es.port || 9200
 };
 
 var elasticSearchClient = new ElasticSearchClient(serverOptions);
