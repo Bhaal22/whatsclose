@@ -9,6 +9,7 @@
       }
    },
    "spec":{
+      "type": "NodePort",
       "ports": [
         {
           "port":3000,

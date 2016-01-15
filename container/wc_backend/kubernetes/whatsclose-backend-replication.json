@@ -25,16 +25,15 @@
         "containers":[
           {
             "name":"whatsclose",
-            "image":"kona.brightcomputing.com:5000/whatsclose",
+            "image":"kona.brightcomputing.com:5000/whatsclose:latest",
+	    "imagePullPolicy": "Always",
             "ports":[
-              {
-                "name":"whatsclose-api", "containerPort":3000
-              }
+              { "name":"whatsclose-api", "containerPort":3000 }
             ],
-	          "env": [
+          "env": [
               { "name": "NODE_ENV", "value": "dev" },
-              { "name": "ELASTICSEARCH_IP", "$WHATSCLOSE_STORAGE_SERVICE_HOST" },
-              { "name": "ELASTICSEARCH_PORT", "$WHATSCLOSE_STORAGE_SERVICE_PORT_HTTP" }
+              { "name": "ELASTICSEARCH_IP", "value": "$(WHATSCLOSE_STORAGE_SERVICE_HOST)" },
+              { "name": "ELASTICSEARCH_PORT", "value": "$(WHATSCLOSE_STORAGE_SERVICE_PORT_HTTP)" }
             ]
           }
         ]
