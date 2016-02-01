@@ -5,7 +5,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  '/components/criteriaSelection/views/CriteriaView.js',
+  '/components/criteriaSelection/views/BandCriteriaView.js',
   '/components/datepicker/views/DatePickerView.js',
   '/components/location/views/LocationView.js',
   'text!/components/search/templates/search.html',
