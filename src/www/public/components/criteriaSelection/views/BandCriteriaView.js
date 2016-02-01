@@ -71,12 +71,14 @@ define([
     _searchTerm: function (event){
       // Check if one of the following keys have been pressed : ';', 'ENTER', 'TAB'
       if (event.key && (event.key === 'Enter' || event.key === 'Tab' || event.key === ';')){
-        var inputValue = this.subComponents[this.cid + '-input'].val();
+        var inputValue = this.subComponents[this.cid + '-input'].val().trim();
 
-        this._addTag(inputValue);
-
-        this.subComponents[this.cid + '-input'].val('');
-        this.subComponents[this.cid + '-input'].focus();
+        if (inputValue.length > 0) {
+          this._addTag(inputValue);
+          
+          this.subComponents[this.cid + '-input'].val('');
+          this.subComponents[this.cid + '-input'].focus();
+        }
       }
       else{
         console.debug ('Nothing to do...');
