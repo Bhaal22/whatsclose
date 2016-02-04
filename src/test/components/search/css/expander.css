@@ -1,0 +1,35 @@
+.expander {
+  background: none repeat scroll 0 0 #FFFFFF;
+  background-color: #F5F5F5;
+  display: block;
+}
+
+.expander:hover,.expander>a:hover,.expander>a>i:hover {
+  cursor: pointer;
+}
+
+.expanded {
+    top: 271px;
+}
+
+textarea {
+    resize: none;
+}
+
+i.glyphicon {
+  font-size: 24px;
+}
+
+.search-form {
+  background: none repeat scroll 0 0 #FFFFFF;
+  display: none;
+}
+
+.form-expanded {
+  display: block;
+}
+
+#search-container {
+    width: 500px;
+    padding: 10px;
+}

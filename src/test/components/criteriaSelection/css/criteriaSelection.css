@@ -1,0 +1,10 @@
+.tag-container{
+	display: inline-block;
+	margin-left: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.tag-action{
+	margin-left: 5px;
+}
