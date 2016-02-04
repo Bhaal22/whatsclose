@@ -1,5 +1,6 @@
 .tag-container{
-	display: inline-block;
+	  display: inline-block;
+    botder: 1px solid #D9D9D9;
 	margin-left: 10px;
   position: relative;
   z-index: 2;
@@ -7,4 +8,103 @@
 
 .tag-action{
 	margin-left: 5px;
+}
+
+.bandInput {
+    font-size: 13px;
+    outline: medium none;
+    text-align: left;
+    height: 16px;
+    resize: none;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+.plop {
+    overflow: hidden;
+}
+
+body, td, input, textarea, select {
+    margin: 0px;
+    font-family: arial,sans-serif;
+}
+
+
+.wO {
+    background-color: #FFF;
+    overflow: hidden;
+}
+
+.oj .l1 {
+    margin: 0px;
+    border: 0px none !important;
+    box-shadow: none;
+    padding: 0px;
+}
+
+.wA {
+    left: -10000px;
+    width: 1px;
+    position: absolute;
+}
+
+.nr, .dI, .Ar {
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #C0C0C0 #D9D9D9 #D9D9D9 !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-left-colors: none !important;
+    border-image: none !important;
+    box-sizing: border-box;
+    border-radius: 1px;
+    margin: 1px !important;
+    padding: 3px 1px 3px 3px;
+}
+
+.nr:focus, .l1, .dI:focus, .Ao {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3) inset;
+    border: 1px solid #4D90FE !important;
+    margin: 1px !important;
+}
+
+.oj .vR {
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+.vR {
+    font-size: 13px;
+    display: inline-block;
+    padding: 3px;
+    vertical-align: top;
+}
+
+.oj .vO {
+    padding: 5px 0px 2px;
+    margin: 0px 3px;
+}
+.vO {
+    text-align: left;
+    /*height: 16px !important;*/
+    overflow: hidden;
+    padding: 6px 3px;
+    resize: none;
+    width: 40px;
+    color: #000;
+    background-color: #FFF;
+}
+.xi, .vO, .vO:focus {
+    font-size: 13px;
+    border: 0px none !important;
+    margin: 0px !important;
+    outline: medium none;
+    box-shadow: none;
+          }
+
+.oj .aA6 {
+    padding-top: 4px;
+}
+.aA6 {
+    float: right;
 }
