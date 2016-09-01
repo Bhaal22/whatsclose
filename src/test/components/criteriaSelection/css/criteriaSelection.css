@@ -74,6 +74,7 @@ body, td, input, textarea, select {
     padding-top: 2px;
 }
 .vR {
+    /*padding:5px 0px 2px;*/
     font-size: 13px;
     display: inline-block;
     padding: 3px;
