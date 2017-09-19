@@ -24,7 +24,7 @@ exports.bandNameQuery = function(bandNames) {
         }
 		};
 
-    if (bandNames !== "") {
+    if ((bandNames !== "") || (bandNames !== undefined)) {
         query.size.bool.must.push(_bandNameDSL(bandNames));
     }
 
