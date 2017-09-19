@@ -19,7 +19,7 @@ exports.bandNameQuery = function(bandNames) {
         "size" : 100, // Number of results to return
         "query" : {
             "bool": {
-                "must" : []
+                "must": []
             }
         }
 		};
@@ -27,6 +27,8 @@ exports.bandNameQuery = function(bandNames) {
     if ((bandNames !== "") || (bandNames !== undefined)) {
         query.query.bool.must.push(_bandNameDSL(bandNames));
     }
+    else
+        console.log('bandNames is either empty or undefined');
 
     return query;
 };
