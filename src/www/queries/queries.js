@@ -15,27 +15,31 @@ function _bandNamesDSL (bandNames) {
 
 
 exports.bandNameQuery = function(bandNames) {
-	  var query = {
-		    "size" : 100, // Number of results to return
-				"query" : {
+    var query = {
+        "size" : 100, // Number of results to return
+        "query" : {
             "bool": {
-					      "must" : [ _bandNameDSL(bandNames) ]
+                "must" : []
             }
-				}
-	  };
+        }
+		};
 
-	  return query;
+    if (bandNames !== "") {
+        query.size.bool.must.push(_bandNameDSL(bandNames));
+    }
+
+    return query;
 };
 
 exports.allSylesQuery = {
-	  "size" : 0,
-	  "aggs" : {
-		    "styles" : {
-			      "terms" : {
-				        "field" : "style"
-			      }
-		    }
-	  }
+    "size" : 0,
+    "aggs" : {
+        "styles" : {
+            "terms" : {
+                "field" : "style"
+            }
+        }
+    }
 };
 
 exports.venue = function(venueName) {
