@@ -21,14 +21,12 @@ exports.bandNameQuery = function(bandNames) {
             "bool": {
                 "must": []
             }
-        }
-		};
-
-    if ((bandNames !== "") || (bandNames !== undefined)) {
+	}
+    };
+    
+    if ((bandNames !== "") && (bandNames !== undefined)) {
         query.query.bool.must.push(_bandNameDSL(bandNames));
     }
-    else
-        console.log('bandNames is either empty or undefined');
 
     return query;
 };

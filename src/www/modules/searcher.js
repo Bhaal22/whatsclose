@@ -23,6 +23,7 @@ var elasticSearchClient = new ElasticSearchClient(serverOptions);
 exports.search = function (params) {
     var deferred = Q.defer();
 
+    console.log(params.bandNames);
     var query = bandNameQuery(params.bandNames);
     var dateFilter = filterByDate(params.from, params.to);
     var geolocFilter = filterByGeolocation(params.location, params.radius);
@@ -34,9 +35,6 @@ exports.search = function (params) {
     if (geolocFilter) {
         query.query.bool.must.push(geolocFilter);
     }
-
-    console.dir(query.query.bool);
-    console.dir(dateFilter);
 	  elasticSearchClient.search(config.es.index, config.es.type, query)
         .on('data', function(data) {
 		        var json = JSON.parse(data);
