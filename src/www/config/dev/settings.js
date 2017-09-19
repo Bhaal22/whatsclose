@@ -1,15 +1,15 @@
 module.exports = {
     web : {
       port: 3000,
-      isHttp:true
+      isHttp: true
     },
     version : {
         major: 0,
         minor: 0,
-        build: 1
+        build: 2
     },
     application:{
-        name: "Whats Close Web",
+        name: "whatsclose api",
         code_name: "Roth"
     }
 };
