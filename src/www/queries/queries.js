@@ -19,7 +19,7 @@ exports.bandNameQuery = function(bandNames) {
 		    "size" : 100, // Number of results to return
 				"query" : {
             "bool": {
-					      "must" : _bandNamesDSL(bandNames)
+					      "must" : [ _bandNamesDSL(bandNames) ]
             }
 				}
 	  };
