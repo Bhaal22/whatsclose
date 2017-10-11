@@ -1,12 +1,26 @@
+'use strict'
+
 var express = require('express')
 var helpers = require('express-helpers')
 var bodyParser = require('body-parser')
 var searcher = require('./modules/searcher')
 var fs = require('fs')
-
-global.__base = __dirname + '/'
+var SwaggerExpress = require('swagger-express-mw')
 
 var app = express()
+
+var config = {
+  appRoot: __dirname // required config
+}
+
+SwaggerExpress.create(config, function (err, swaggerExpress) {
+  if (err) { throw err }
+
+  // install middleware
+  swaggerExpress.register(app)
+})
+
+global.__base = __dirname + '/'
 
 app.use(bodyParser.urlencoded({
   extended: true
